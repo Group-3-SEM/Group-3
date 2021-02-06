@@ -1,4 +1,4 @@
-package com.napier.Group3;
+package Group3;
 
 public class App
 {
