@@ -4,8 +4,8 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>com.napier.Group3</groupId>
-    <artifactId>Group3</artifactId>
+    <groupId>Group3</groupId>
+    <artifactId>Group-3</artifactId>
     <version>0.1.0.1</version>
 
     <properties>
@@ -28,7 +28,7 @@
                 <configuration>
                     <archive>
                         <manifest>
-                            <mainClass>com.napier.sem.App</mainClass>
+                            <mainClass>Group3.App</mainClass>
                         </manifest>
                     </archive>
                     <descriptorRefs>

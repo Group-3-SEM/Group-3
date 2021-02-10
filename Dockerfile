@@ -1,4 +1,4 @@
 FROM openjdk:latest
-COPY ./target/classes/Group3 /tmp/Group3
+COPY ./target/Group-3-0.1.0.1-jar-with-dependencies.jar /tmp
 WORKDIR /tmp
-ENTRYPOINT ["java", "Group3.App"]
+ENTRYPOINT ["java", "-jar", "Group-3-0.1.0.1-jar-with-dependencies.jar"]
