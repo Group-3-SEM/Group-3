@@ -6,7 +6,7 @@ import com.mongodb.client.MongoCollection;
 import org.bson.Document;
 
 /**
- * Connects to a mogo db
+ * Connects to a mongo db
  */
 public class App
 {
