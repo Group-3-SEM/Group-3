@@ -32,7 +32,7 @@ Employee.
 
 ### Trigger
 
-A request for area information is sent to the employee.
+A request for a report is sent to the employee.
 
 ## MAIN SUCCESS SCENARIO
 
