@@ -1,10 +1,10 @@
-# USE CASE: 3 Produce a Report on the Population of all the Countries in the Given Region by Largest to Smallest
+# USE CASE: 31 Produce a Report on the Population of the Given City.
 
 ## CHARACTERISTIC INFORMATION
 
 ### Goal in Context
 
-As an *Employee* I want *to produce a report on the population of all the Countries in a region by Largest to Smallest* so that *I can provide this information to the organisation.*
+As an *Employee* I want *to produce a report on the population of a city* so that *I can provide this information to the organisation.*
 
 ### Scope
 
@@ -16,7 +16,7 @@ Primary task.
 
 ### Preconditions
 
-We know the region. Database contains current data on the world.
+Database contains current data on the world.
 
 ### Success End Condition
 
@@ -37,12 +37,12 @@ A request for a report is sent to the employee.
 ## MAIN SUCCESS SCENARIO
 
 1. Organisation requests the population report
-2. Employee extracts a list of all the countries in the given region by largest to smallest.
+2. Employee extracts the population of the city.
 3. Employee provides report to organisation.
 
 ## EXTENSIONS
 
-1. Region doesn't exist
+None.
 
 ## SUB-VARIATIONS
 

@@ -1,4 +1,4 @@
-# USE CASE: 2 Produce a Report on the Population of all the Countries in a Continent by Largest to Smallest
+# USE CASE: 2 Produce a Report on the Population of all the Countries in the Given Continent by Largest to Smallest
 
 ## CHARACTERISTIC INFORMATION
 
@@ -16,7 +16,7 @@ Primary task.
 
 ### Preconditions
 
-Database contains current data on the continent.
+We know the continent. Database contains current data on the world.
 
 ### Success End Condition
 
