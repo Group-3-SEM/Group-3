@@ -1,0 +1,168 @@
+@startuml
+'pop is short for population
+
+actor E1 as "Employee"
+
+rectangle Database
+
+rectangle System {
+    E1 -- System
+    System -> Database
+    usecase UCa as "Print report"
+
+    usecase UC1 as "Get country pop from world;
+    largest to smallest"
+    UC1 ..> UCa : include
+
+    usecase UC2 as "Get country pop from given continent;
+    largest to smallest"
+    UC2 ..> UCa : include
+
+    usecase UC3 as "Get country pop from given region;
+    largest to smallest"
+    UC3 ..> UCa : include
+
+    usecase UC4 as "Get top (N) pop countries
+    from given world"
+    UC4 ..> UCa : include
+
+    usecase UC5 as "Get top (N) pop countries
+    from given continent"
+    UC5 ..> UCa : include
+
+    usecase UC6 as "Get top (N) pop countries
+    from given region"
+    UC6 ..> UCa : include
+
+    usecase UC7 as "Get pop of cities from world;
+    largest to smallest"
+    UC7 ..> UCa : include
+
+    usecase UC8 as "Get pop of cities from given continent;
+    largest to smallest"
+    UC8 ..> UCa : include
+
+    usecase UC9 as "Get pop of cities from given region;
+    largest to smallest"
+    UC9 ..> UCa : include
+
+    usecase UC10 as "Get pop of cities from given country;
+    largest to smallest"
+    UC10 ..> UCa : include
+
+    usecase UC11 as "Get pop of cities from given district;
+    largest to smallest"
+    UC11 ..> UCa : include
+
+    usecase UC12 as "Get top (N) pop cities
+    from given world"
+    UC12 ..> UCa : include
+
+    usecase UC13 as "Get top (N) pop cities
+    from given continent"
+    UC13 ..> UCa : include
+
+    usecase UC14 as "Get top (N) pop cities
+    from given region"
+    UC14 ..> UCa : include
+
+    usecase UC15 as "Get top (N) pop cities
+    from given country"
+    UC15 ..> UCa : include
+
+    usecase UC16 as "Get top (N) pop cities
+    from given district"
+    UC16 ..> UCa : include
+
+    usecase UC17 as "Get pop of capital cities from world;
+    largest to smallest"
+    UC17 ..> UCa : include
+
+    usecase UC18 as "Get pop of capital cities from given continent;
+    largest to smallest"
+    UC18 ..> UCa : include
+
+    usecase UC19 as "Get pop of capital cities from given region;
+    largest to smallest"
+    UC19 ..> UCa : include
+
+    usecase UC20 as "Get top (N) pop capital cities
+    from given world"
+    UC16 ..> UCa : include
+
+    usecase UC21 as "Get top (N) pop capital cities
+    from given continent"
+    UC21 ..> UCa : include
+
+    usecase UC22 as "Get top (N) pop capital cities
+    from given region"
+    UC22 ..> UCa : include
+
+    usecase UC23 as "Get pop of: people, people in cities,
+    people not in cities from all continents"
+    UC23 ..> UCa : include
+
+    usecase UC24 as "Get pop of: people, people in cities,
+    people not in cities from all regions"
+    UC24 ..> UCa : include
+
+    usecase UC25 as "Get pop of: people, people in cities,
+    people not in cities from all countries"
+    UC25 ..> UCa : include
+
+    usecase UC26 as "Get pop of the world"
+    UC26 ..> UCa : include
+
+    usecase UC27 as "Get pop of given continent"
+    UC27 ..> UCa : include
+
+    usecase UC28 as "Get pop of given region"
+    UC28 ..> UCa : include
+
+    usecase UC29 as "Get pop of given country"
+    UC29 ..> UCa : include
+
+    usecase UC30 as "Get pop of given district"
+    UC30 ..> UCa : include
+
+    usecase UC31 as "Get pop of given city"
+    UC31 ..> UCa : include
+
+    usecase UC32 as "Get num of chinese speakers
+    from greatest num to smallest;
+    including % of world pop"
+    UC32 ..> UCa : include
+
+    usecase UC33 as "Get num of english speakers
+    from greatest num to smallest;
+    including % of world pop"
+    UC33 ..> UCa : include
+
+    usecase UC34 as "Get num of hindi speakers
+    from greatest num to smallest;
+    including % of world pop"
+    UC34 ..> UCa : include
+
+    usecase UC35 as "Get num of spanish speakers
+    from greatest num to smallest;
+    including % of world pop"
+    UC35 ..> UCa : include
+
+    usecase UC36 as "Get num of arabic speakers
+    from greatest num to smallest;
+    including % of world pop"
+    UC36 ..> UCa : include
+
+    usecase UC37 as "Get countries with these columns:
+    code, name, continent, region, pop, capital"
+    UC37 ..> UCa : include
+
+    usecase UC38 as "Get cities with these columns:
+    name, country, district, pop"
+    UC38 ..> UCa : include
+
+    usecase UC39 as "Get capital cities with these
+    columns: name, country, pop"
+    UC37 ..> UCa : include
+}
+@enduml
