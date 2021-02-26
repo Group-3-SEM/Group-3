@@ -4,7 +4,7 @@
 
 ### Goal in Context
 
-As an *Employee* I want *to produce a report on the population of all the Countries in the World by Largest to Smallest*.
+As an *Employee* I want *to produce a report on the population of all the Countries in the World by Largest to Smallest* so that *I can provide this information to the organisation.*
 
 ### Scope
 
@@ -16,7 +16,7 @@ Primary task.
 
 ### Preconditions
 
-We know the area.  Database contains current data on the world.
+Database contains current data on the world.
 
 ### Success End Condition
 
@@ -36,8 +36,12 @@ A request for area information is sent to the employee.
 
 ## MAIN SUCCESS SCENARIO
 
+1. Organisation requests the population report
+2. Employee extracts a list of all the countries in the world by largest to smallest.
+3. Employee provides report to organisation.
 
 ## EXTENSIONS
+
 
 
 ## SUB-VARIATIONS
