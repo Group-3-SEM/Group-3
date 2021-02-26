@@ -1,10 +1,10 @@
-# USE CASE: 2 Produce a Report on the Population of a Given Area
+# USE CASE: 2 Produce a Report on the Population of all the Countries in the World by Largest to Smallest
 
 ## CHARACTERISTIC INFORMATION
 
 ### Goal in Context
 
-As an *Employee* I want *to produce a report on the population of a given area*.
+As an *Employee* I want *to produce a report on the population of all the Countries in the World by Largest to Smallest*.
 
 ### Scope
 
