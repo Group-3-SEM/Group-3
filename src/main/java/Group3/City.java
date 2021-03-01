@@ -1,7 +1,7 @@
 package Group3;
 
 /**
- * Represents an employee
+ * Represents an city
  */
 public class City
 {
