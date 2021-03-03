@@ -2,9 +2,6 @@ package Group3;
 //defining imports
 import java.sql.*;
 
-/**
- * Connects to a mongo db
- */
 public class App
 {
     public static void main(String[] args)
@@ -46,6 +43,7 @@ public class App
         }
 
         int retries = 10;
+        //for loop to try connecting to database 10 times
         for (int i = 0; i < retries; ++i)
         {
             System.out.println("Connecting to database...");
@@ -60,11 +58,13 @@ public class App
             }
             catch (SQLException sqle)
             {
+                //Displaying Error message
                 System.out.println("Failed to connect to database attempt " + Integer.toString(i));
                 System.out.println(sqle.getMessage());
             }
             catch (InterruptedException ie)
             {
+                //Displaying Error message
                 System.out.println("Thread interrupted? Should not happen.");
             }
         }
@@ -84,11 +84,13 @@ public class App
             }
             catch (Exception e)
             {
+                // Displaying error message when disconnecting error
                 System.out.println("Error closing connection to database");
             }
         }
     }
 
+    // Get city Method for getting city details
     public City getCity(int ID)
     {
         try
@@ -102,7 +104,7 @@ public class App
                             + "WHERE ID = " + ID;
             // Execute SQL statement
             ResultSet rset = stmt.executeQuery(strSelect);
-            // Return new employee if valid.
+            // Return new City if valid.
             // Check one is returned
             if (rset.next())
             {
@@ -119,12 +121,14 @@ public class App
         }
         catch (Exception e)
         {
+            // Displaying error message
             System.out.println(e.getMessage());
             System.out.println("Failed to get city details");
             return null;
         }
     }
 
+    //Method for displaying city details
     public void displayCity(City cit)
     {
         if (cit != null)
