@@ -40,6 +40,7 @@ public class App
         }
         catch (ClassNotFoundException e)
         {
+            //Send error message
             System.out.println("Could not load SQL driver");
             System.exit(-1);
         }
