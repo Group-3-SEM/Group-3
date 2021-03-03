@@ -6,163 +6,239 @@ actor E1 as "Employee"
 rectangle Database
 
 rectangle System {
-    E1 -- System
-    System -> Database
-    usecase UCa as "Print report"
+    usecase UCprint as "Print report"
 
     usecase UC1 as "Get country pop from world;
     largest to smallest"
-    UC1 ..> UCa : include
+    E1 -- UC1
+    UC1 - Database
+    UC1 ..> UCprint : include
 
     usecase UC2 as "Get country pop from given continent;
     largest to smallest"
-    UC2 ..> UCa : include
+    E1 -- UC2
+    UC2 - Database
+    UC2 ..> UCprint : include
 
     usecase UC3 as "Get country pop from given region;
     largest to smallest"
-    UC3 ..> UCa : include
+    E1 -- UC3
+    UC3 - Database
+    UC3 ..> UCprint : include
 
     usecase UC4 as "Get top (N) pop countries
     from given world"
-    UC4 ..> UCa : include
+    E1 -- UC4
+    UC4 - Database
+    UC4 ..> UCprint : include
 
     usecase UC5 as "Get top (N) pop countries
     from given continent"
-    UC5 ..> UCa : include
+    E1 -- UC5
+    UC5 - Database
+    UC5 ..> UCprint : include
 
     usecase UC6 as "Get top (N) pop countries
     from given region"
-    UC6 ..> UCa : include
+    E1 -- UC6
+    UC6 - Database
+    UC6 ..> UCprint : include
 
     usecase UC7 as "Get pop of cities from world;
     largest to smallest"
-    UC7 ..> UCa : include
+    E1 -- UC7
+    UC7 - Database
+    UC7 ..> UCprint : include
 
     usecase UC8 as "Get pop of cities from given continent;
     largest to smallest"
-    UC8 ..> UCa : include
+    E1 -- UC8
+    UC8 - Database
+    UC8 ..> UCprint : include
 
     usecase UC9 as "Get pop of cities from given region;
     largest to smallest"
-    UC9 ..> UCa : include
+    E1 -- UC9
+    UC9 - Database
+    UC9 ..> UCprint : include
 
     usecase UC10 as "Get pop of cities from given country;
     largest to smallest"
-    UC10 ..> UCa : include
+    E1 -- UC10
+    10 - Database
+    UC10 ..> UCprint : include
 
     usecase UC11 as "Get pop of cities from given district;
     largest to smallest"
-    UC11 ..> UCa : include
+    E1 -- UC11
+    UC11 - Database
+    UC11 ..> UCprint : include
 
     usecase UC12 as "Get top (N) pop cities
     from given world"
-    UC12 ..> UCa : include
+    E1 -- UC12
+    UC12 - Database
+    UC12 ..> UCprint : include
 
     usecase UC13 as "Get top (N) pop cities
     from given continent"
-    UC13 ..> UCa : include
+    E1 -- UC13
+    UC13 - Database
+    UC13 ..> UCprint : include
 
     usecase UC14 as "Get top (N) pop cities
     from given region"
-    UC14 ..> UCa : include
+    E1 -- UC14
+    UC14 - Database
+    UC14 ..> UCprint : include
 
     usecase UC15 as "Get top (N) pop cities
     from given country"
-    UC15 ..> UCa : include
+    E1 -- UC15
+    UC15 - Database
+    UC15 ..> UCprint : include
 
     usecase UC16 as "Get top (N) pop cities
     from given district"
-    UC16 ..> UCa : include
+    E1 -- UC16
+    UC16 - Database
+    UC16 ..> UCprint : include
 
     usecase UC17 as "Get pop of capital cities from world;
     largest to smallest"
-    UC17 ..> UCa : include
+    E1 -- UC17
+    UC17 - Database
+    UC17 ..> UCprint : include
 
     usecase UC18 as "Get pop of capital cities from given continent;
     largest to smallest"
-    UC18 ..> UCa : include
+    E1 -- UC18
+    UC18 - Database
+    UC18 ..> UCprint : include
 
     usecase UC19 as "Get pop of capital cities from given region;
     largest to smallest"
-    UC19 ..> UCa : include
+    E1 -- UC19
+    UC19 - Database
+    UC19 ..> UCprint : include
 
     usecase UC20 as "Get top (N) pop capital cities
     from given world"
-    UC16 ..> UCa : include
+    E1 -- UC20
+    UC20 - Database
+    UC20 ..> UCprint : include
 
     usecase UC21 as "Get top (N) pop capital cities
     from given continent"
-    UC21 ..> UCa : include
+    E1 -- UC21
+    UC21 - Database
+    UC21 ..> UCprint : include
 
     usecase UC22 as "Get top (N) pop capital cities
     from given region"
-    UC22 ..> UCa : include
+    E1 -- UC22
+    UC22 - Database
+    UC22 ..> UCprint : include
 
     usecase UC23 as "Get pop of: people, people in cities,
     people not in cities from all continents"
-    UC23 ..> UCa : include
+    E1 -- UC23
+    UC23 - Database
+    UC23 ..> UCprint : include
 
     usecase UC24 as "Get pop of: people, people in cities,
     people not in cities from all regions"
-    UC24 ..> UCa : include
+    E1 -- UC24
+    UC24 - Database
+    UC24 ..> UCprint : include
 
     usecase UC25 as "Get pop of: people, people in cities,
     people not in cities from all countries"
-    UC25 ..> UCa : include
+    E1 -- UC25
+    UC25 - Database
+    UC25 ..> UCprint : include
 
     usecase UC26 as "Get pop of the world"
-    UC26 ..> UCa : include
+    E1 -- UC26
+    UC26 - Database
+    UC26 ..> UCprint : include
 
     usecase UC27 as "Get pop of given continent"
-    UC27 ..> UCa : include
+    E1 -- UC27
+    UC27 - Database
+    UC27 ..> UCprint : include
 
     usecase UC28 as "Get pop of given region"
-    UC28 ..> UCa : include
+    E1 -- UC28
+    UC28 - Database
+    UC28 ..> UCprint : include
 
     usecase UC29 as "Get pop of given country"
-    UC29 ..> UCa : include
+    E1 -- UC29
+    UC29 - Database
+    UC29 ..> UCprint : include
 
     usecase UC30 as "Get pop of given district"
-    UC30 ..> UCa : include
+    E1 -- UC30
+    UC30 - Database
+    UC30 ..> UCprint : include
 
     usecase UC31 as "Get pop of given city"
-    UC31 ..> UCa : include
+    E1 -- UC31
+    UC31 - Database
+    UC31 ..> UCprint : include
 
     usecase UC32 as "Get num of chinese speakers
     from greatest num to smallest;
     including % of world pop"
-    UC32 ..> UCa : include
+    E1 -- UC32
+    UC32 - Database
+    UC32 ..> UCprint : include
 
     usecase UC33 as "Get num of english speakers
     from greatest num to smallest;
     including % of world pop"
-    UC33 ..> UCa : include
+    E1 -- UC33
+    UC33 - Database
+    UC33 ..> UCprint : include
 
     usecase UC34 as "Get num of hindi speakers
     from greatest num to smallest;
     including % of world pop"
-    UC34 ..> UCa : include
+    E1 -- UC34
+    UC34 - Database
+    UC34 ..> UCprint : include
 
     usecase UC35 as "Get num of spanish speakers
     from greatest num to smallest;
     including % of world pop"
-    UC35 ..> UCa : include
+    E1 -- UC35
+    UC35 - Database
+    UC35 ..> UCprint : include
 
     usecase UC36 as "Get num of arabic speakers
     from greatest num to smallest;
     including % of world pop"
-    UC36 ..> UCa : include
+    E1 -- UC36
+    UC36 - Database
+    UC36 ..> UCprint : include
 
     usecase UC37 as "Get countries with these columns:
     code, name, continent, region, pop, capital"
-    UC37 ..> UCa : include
+    E1 -- UC37
+    UC37 - Database
+    UC37 ..> UCprint : include
 
     usecase UC38 as "Get cities with these columns:
     name, country, district, pop"
-    UC38 ..> UCa : include
+    E1 -- UC38
+    UC38 - Database
+    UC38 ..> UCprint : include
 
     usecase UC39 as "Get capital cities with these
     columns: name, country, pop"
-    UC37 ..> UCa : include
+    E1 -- UC39
+    UC39 - Database
+    UC39 ..> UCprint : include
 }
 @enduml
