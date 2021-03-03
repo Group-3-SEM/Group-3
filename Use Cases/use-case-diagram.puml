@@ -65,7 +65,7 @@ rectangle System {
     usecase UC10 as "Get pop of cities from given country;
     largest to smallest"
     E1 -- UC10
-    10 - Database
+    UC10 - Database
     UC10 ..> UCprint : include
 
     usecase UC11 as "Get pop of cities from given district;
