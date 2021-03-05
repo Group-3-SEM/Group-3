@@ -17,6 +17,11 @@ public class App
         // Display results
         a.displayCity(cit);
 
+        // Get country
+        Country country = a.getCountry(1);
+        //Display Details
+        a.displayCountry(country);
+
         // Disconnect from database
         a.disconnect();
     }
@@ -139,6 +144,78 @@ public class App
                             + cit.CountryCode + "\n"
                             + cit.District + "\n"
                             + cit.Population + "\n");
+        }
+    }
+
+    //Method for getting County
+    public Country getCountry(int Capital)
+    {
+        try
+        {
+            // Create an SQL statement
+            Statement stmt = con.createStatement();
+            // Create string for SQL statement
+            String strSelect =
+                    "SELECT Code, Name, Continent, Region, SurfaceArea, IndepYear, Population, LifeExpectancy, GNP, GNPOld, LocalName, GovernmentForm, HeadOfState, Capital, Code2 "
+                            + "FROM country "
+                            + "WHERE Capital = " + Capital;
+            // Execute SQL statement
+            ResultSet rset = stmt.executeQuery(strSelect);
+            // Return new City if valid.
+            // Check one is returned
+            if (rset.next())
+            {
+                Country country = new Country();
+                country.Code = rset.getString("Code");
+                country.Name = rset.getString("Name");
+                country.Continent = rset.getString("Continent");
+                country.Region = rset.getString("Region");
+                country.SurfaceArea = rset.getFloat("SurfaceArea");
+                country.IndepYear = rset.getInt("IndepYear");
+                country.Population = rset.getInt("Population");
+                country.LifeExpectancy = rset.getFloat("LifeExpectancy");
+                country.GNP = rset.getFloat("GNP");
+                country.OldGNP = rset.getFloat("GNPOld");
+                country.LocalName = rset.getString("LocalName");
+                country.GovernmentForm = rset.getString("GovernmentForm");
+                country.HeadOfState = rset.getString("HeadOfState");
+                country.Capital = rset.getInt("Capital");
+                country.Code2 = rset.getString("Code2");
+                return country;
+            }
+            else
+                return null;
+        }
+        catch (Exception e)
+        {
+            // Displaying error message
+            System.out.println(e.getMessage());
+            System.out.println("Failed to get country details");
+            return null;
+        }
+    }
+
+    //Method for displaying country details
+    public void displayCountry(Country country)
+    {
+        if (country != null)
+        {
+            System.out.println(
+                    country.Code + " "
+                            + country.Name + " "
+                            + country.Continent + "\n"
+                            + country.Region + "\n"
+                            + country.SurfaceArea + "\n"
+                            + country.IndepYear + "\n"
+                            + country.Population + "\n"
+                            + country.LifeExpectancy + "\n"
+                            + country.GNP + "\n"
+                            + country.OldGNP + "\n"
+                            + country.LocalName + "\n"
+                            + country.GovernmentForm + "\n"
+                            + country.HeadOfState + "\n"
+                            + country.Capital + "\n"
+                            + country.Code2 + "\n");
         }
     }
 }

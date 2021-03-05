@@ -37,7 +37,7 @@ public class Country
     /**
      * population
      */
-    public int population;
+    public int Population;
 
     /**
      * LifeExpectancy
@@ -77,5 +77,5 @@ public class Country
     /**
      * Code2
      */
-    public int Code2;
+    public String Code2;
 }
