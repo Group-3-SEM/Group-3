@@ -22,6 +22,11 @@ public class App
         //Display Details
         a.displayCountry(country);
 
+        //Get country Language
+        CountryLanguage cl = a.getLanguage(0.1);
+        //Display Details
+        a.displayLanguage(cl);
+
         // Disconnect from database
         a.disconnect();
     }
@@ -216,6 +221,56 @@ public class App
                             + country.HeadOfState + "\n"
                             + country.Capital + "\n"
                             + country.Code2 + "\n");
+        }
+    }
+
+    // Get city Method for getting city details
+    public CountryLanguage getLanguage(double Percentage)
+    {
+        try
+        {
+            // Create an SQL statement
+            Statement stmt = con.createStatement();
+            // Create string for SQL statement
+            String strSelect =
+                    "SELECT CountryCode, Language, IsOfficial, Percentage "
+                            + "FROM countrylanguage "
+                            + "WHERE Percentage = " + Percentage;
+            // Execute SQL statement
+            ResultSet rset = stmt.executeQuery(strSelect);
+            // Return new City if valid.
+            // Check one is returned
+            if (rset.next())
+            {
+                CountryLanguage cl = new CountryLanguage();
+                cl.CountryCode = rset.getString("CountryCode");
+                cl.Language = rset.getString("Language");
+                cl.IsOfficial = rset.getString("IsOfficial");
+                cl.Percentage = rset.getDouble("Percentage");
+                return cl;
+            }
+            else
+                return null;
+        }
+        catch (Exception e)
+        {
+            // Displaying error message
+            System.out.println(e.getMessage());
+            System.out.println("Failed to get country language details");
+            return null;
+        }
+    }
+
+    //Method for displaying countrylanguage details
+    public void displayLanguage(CountryLanguage cl)
+    {
+        if (cl != null)
+        {
+            System.out.println(
+                    cl.CountryCode + " "
+                            + cl.Language + " "
+                            + cl.IsOfficial + "\n"
+                            + cl.Percentage + "\n");
         }
     }
 }

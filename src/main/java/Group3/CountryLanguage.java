@@ -20,5 +20,5 @@ public class CountryLanguage {
     /**
      * Percentage
      */
-    public float Percentage;
+    public double Percentage;
 }
