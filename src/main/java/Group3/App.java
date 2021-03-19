@@ -27,6 +27,18 @@ public class App
         //Display Details
         a.displayLanguage(cl);
 
+        //Displaying report 25
+        Country report25 = a.getReport25("Africa");
+        a.displayCountry(report25);
+
+        //Displaying report 26
+        Country report26 = a.getReport26("Southern Europe");
+        a.displayCountry(report26);
+
+        //Displaying report 28
+        Country report28 = a.getReport28("Africa", 5);
+        a.displayCountry(report28);
+
         // Disconnect from database
         a.disconnect();
     }
@@ -271,6 +283,116 @@ public class App
                             + cl.Language + " "
                             + cl.IsOfficial + "\n"
                             + cl.Percentage + "\n");
+        }
+    }
+
+    //Method for report 25
+    public Country getReport26(String region)
+    {
+        try
+        {
+            // Create an SQL statement
+            Statement stmt = con.createStatement();
+            // Create string for SQL statement
+            String strSelect =
+                    "SELECT Name, Population, Region"
+                            + "FROM Country "
+                            + "WHERE Region = " + region
+                            + "ORDER BY ASC";
+            // Execute SQL statement
+            ResultSet rset = stmt.executeQuery(strSelect);
+            // Return new City if valid.
+            // Check one is returned
+            if (rset.next())
+            {
+                Country country = new Country();
+                country.Name = rset.getString("Name");
+                country.Continent = rset.getString("Continent");
+                country.Population = rset.getInt("Region");
+                return country;
+            }
+            else
+                return null;
+        }
+        catch (Exception e)
+        {
+            // Displaying error message
+            System.out.println(e.getMessage());
+            System.out.println("Failed to get report26 details");
+            return null;
+        }
+    }
+
+    public Country getReport25(String continent)
+    {
+        try
+        {
+            // Create an SQL statement
+            Statement stmt = con.createStatement();
+            // Create string for SQL statement
+            String strSelect =
+                    "SELECT Name, Population, Continent"
+                            + "FROM Country "
+                            + "WHERE Continent = " + continent
+                            + "ORDER BY ASC";
+            // Execute SQL statement
+            ResultSet rset = stmt.executeQuery(strSelect);
+            // Return new City if valid.
+            // Check one is returned
+            if (rset.next())
+            {
+                Country country = new Country();
+                country.Name = rset.getString("Name");
+                country.Continent = rset.getString("Continent");
+                country.Population = rset.getInt("Population");
+                return country;
+            }
+            else
+                return null;
+        }
+        catch (Exception e)
+        {
+            // Displaying error message
+            System.out.println(e.getMessage());
+            System.out.println("Failed to get report25 details");
+            return null;
+        }
+    }
+
+    public Country getReport28(String continent, int num)
+    {
+        try
+        {
+            // Create an SQL statement
+            Statement stmt = con.createStatement();
+            // Create string for SQL statement
+            String strSelect =
+                    "SELECT Name, Population, Continent"
+                            + "FROM Country "
+                            + "WHERE Continent = " + continent
+                            + "ORDER BY ASC"
+                            + "LIMIT " + num;
+            // Execute SQL statement
+            ResultSet rset = stmt.executeQuery(strSelect);
+            // Return new City if valid.
+            // Check one is returned
+            if (rset.next())
+            {
+                Country country = new Country();
+                country.Name = rset.getString("Name");
+                country.Continent = rset.getString("Continent");
+                country.Population = rset.getInt("Population");
+                return country;
+            }
+            else
+                return null;
+        }
+        catch (Exception e)
+        {
+            // Displaying error message
+            System.out.println(e.getMessage());
+            System.out.println("Failed to get report27 details");
+            return null;
         }
     }
 }
