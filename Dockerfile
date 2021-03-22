@@ -1,5 +1,5 @@
 FROM openjdk:latest
-COPY ./target/Group-3-0.1.0.2-jar-with-dependencies.jar /tmp
+COPY ./target/seMethods.jar /tmp
 WORKDIR /tmp
-ENTRYPOINT ["java", "-jar", "Group-3-0.1.0.2-jar-with-dependencies.jar"]
+ENTRYPOINT ["java", "-jar", "Group3.jar", "db:3306"]
 
