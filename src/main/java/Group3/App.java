@@ -1,6 +1,7 @@
 package Group3;
 //defining imports
 import java.sql.*;
+import java.util.ArrayList;
 
 public class App
 {
@@ -28,11 +29,13 @@ public class App
         a.displayLanguage(cl);
 
         //Displaying report 25
-        Country report25 = a.getReport25("Africa");
-        a.displayCountry(report25);
+        ArrayList<Country> report25 = a.getReport25("Africa");
+        a.printCountries(report25);
 
         //Displaying report 26
-        Country report26 = a.getReport26("Southern Europe");
+        String str = "Southern Europe";
+        char[] ch = str.toCharArray();
+        Country report26 = a.getReport26(ch);
         a.displayCountry(report26);
 
         //Displaying report 28
@@ -287,7 +290,7 @@ public class App
     }
 
     //Method for report 25
-    public Country getReport26(String region)
+    public Country getReport26(char[] region)
     {
         try
         {
@@ -296,9 +299,9 @@ public class App
             // Create string for SQL statement
             String strSelect =
                     "SELECT Name, Population, Region"
-                            + "FROM Country "
-                            + "WHERE Region = " + region
-                            + "ORDER BY ASC";
+                            + "FROM country "
+                            + "WHERE Region = " + region;
+                            //+ "ORDER BY Population ASC";
             // Execute SQL statement
             ResultSet rset = stmt.executeQuery(strSelect);
             // Return new City if valid.
@@ -323,7 +326,8 @@ public class App
         }
     }
 
-    public Country getReport25(String continent)
+
+    public ArrayList<Country> getReport25(String continent)
     {
         try
         {
@@ -331,24 +335,35 @@ public class App
             Statement stmt = con.createStatement();
             // Create string for SQL statement
             String strSelect =
-                    "SELECT Name, Population, Continent"
-                            + "FROM Country "
-                            + "WHERE Continent = " + continent
-                            + "ORDER BY ASC";
+                    "SELECT Code, Name, Continent, Region, SurfaceArea, IndepYear, Population, LifeExpectancy, GNP, GNPOld, LocalName, GovernmentForm, HeadOfState, Capital, Code2 "
+                            + "FROM country "
+                            + "WHERE Continent = " + "'" + continent + "'";
             // Execute SQL statement
             ResultSet rset = stmt.executeQuery(strSelect);
             // Return new City if valid.
             // Check one is returned
-            if (rset.next())
+            ArrayList<Country> countries = new ArrayList<Country>();
+            while (rset.next())
             {
                 Country country = new Country();
+                country.Code = rset.getString("Code");
                 country.Name = rset.getString("Name");
                 country.Continent = rset.getString("Continent");
+                country.Region = rset.getString("Region");
+                country.SurfaceArea = rset.getFloat("SurfaceArea");
+                country.IndepYear = rset.getInt("IndepYear");
                 country.Population = rset.getInt("Population");
-                return country;
+                country.LifeExpectancy = rset.getFloat("LifeExpectancy");
+                country.GNP = rset.getFloat("GNP");
+                country.OldGNP = rset.getFloat("GNPOld");
+                country.LocalName = rset.getString("LocalName");
+                country.GovernmentForm = rset.getString("GovernmentForm");
+                country.HeadOfState = rset.getString("HeadOfState");
+                country.Capital = rset.getInt("Capital");
+                country.Code2 = rset.getString("Code2");
+                countries.add(country);
             }
-            else
-                return null;
+            return countries;
         }
         catch (Exception e)
         {
@@ -359,6 +374,65 @@ public class App
         }
     }
 
+
+
+    /*
+    public ArrayList<Country> getReport25(char[] continent)
+    {
+        try
+        {
+            // Create an SQL statement
+            Statement stmt = con.createStatement();
+            // Create string for SQL statement
+            String strSelect =
+                    "SELECT Name, Population, Continent"
+                            + "FROM country ";
+                            //+ "WHERE Continent = " + continent
+                            //+ "ORDER BY Population ASC";
+            // Execute SQL statement
+            ResultSet rset = stmt.executeQuery(strSelect);
+            ArrayList<Country> countries = new ArrayList<Country>();
+            // Return new City if valid.
+            // Check one is returned
+            while (rset.next())
+            {
+                Country country = new Country();
+                country.Name = rset.getString("Name");
+                country.Continent = rset.getString("Continent");
+                country.Population = rset.getInt("Population");
+                countries.add(country);
+            }
+            return countries;
+        }
+        catch (Exception e)
+        {
+            // Displaying error message
+            System.out.println(e.getMessage());
+            System.out.println("Failed to get report25 details");
+            return null;
+        }
+    }
+     */
+
+    public void printCountries(ArrayList<Country> countries)
+    {
+        if (countries == null)
+        {
+            System.out.println("No countries");
+            return;
+        }
+        System.out.println(String.format("%s - %s - %s - %s - %s - %s - %s - %s - %s - %s - %s - %s - %s - %s - %s", "Code", "Name", "Continent", "Region", "SurfaceArea", "IndepYear", "Population", "LifeExpectancy", "GNP", "GNPOld", "LocalName", "GovernmentForm", "HeadOfState", "Capital", "Code2"));
+        for (Country country : countries)
+        {
+            if(country == null)
+                continue;
+            String countryString = String.format("%s - %s - %s - %s - %s - %s - %s - %s - %s - %s - %s - %s - %s - %s - %s", country.Code, country.Name, country.Continent, country.Region, country.SurfaceArea, country.IndepYear, country.Population, country.LifeExpectancy, country.GNP, country.OldGNP, country.LocalName, country.GovernmentForm, country.HeadOfState, country.Capital, country.Code2);
+            System.out.println(countryString);
+        }
+    }
+
+
+
     public Country getReport28(String continent, int num)
     {
         try
@@ -368,9 +442,9 @@ public class App
             // Create string for SQL statement
             String strSelect =
                     "SELECT Name, Population, Continent"
-                            + "FROM Country "
+                            + "FROM country "
                             + "WHERE Continent = " + continent
-                            + "ORDER BY ASC"
+                            + "ORDER BY Population ASC"
                             + "LIMIT " + num;
             // Execute SQL statement
             ResultSet rset = stmt.executeQuery(strSelect);
@@ -391,7 +465,7 @@ public class App
         {
             // Displaying error message
             System.out.println(e.getMessage());
-            System.out.println("Failed to get report27 details");
+            System.out.println("Failed to get report28 details");
             return null;
         }
     }
