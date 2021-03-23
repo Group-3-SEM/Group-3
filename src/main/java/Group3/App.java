@@ -469,4 +469,45 @@ public class App
             return null;
         }
     }
+
+
+    public ArrayList<Country> getReport29(String region, int n)
+    {
+        try
+        {
+            // Create an SQL statement
+            Statement stmt = con.createStatement();
+            // Create string for SQL statement
+            String strSelect =
+                    "SELECT Code, Name, Continent, Region, Population, Capital"
+                            + "FROM country "
+                            + "WHERE Region = " + region
+                            + "ORDER BY Population DESC"
+                            + "LIMIT " + n;
+            // Execute SQL statement
+            ResultSet rset = stmt.executeQuery(strSelect);
+            // Create array list to store countries
+            ArrayList<Country> countries = new ArrayList<>();
+            // Return new Country if valid.
+            // Check one is returned
+            while (rset.next()) {
+                Country country = new Country();
+                country.Code = rset.getString("Code");
+                country.Name = rset.getString("Name");
+                country.Continent = rset.getString("Continent");
+                country.Region = rset.getString("Region");
+                country.Population = rset.getInt("Population");
+                country.Capital = rset.getInt("Capital");
+                countries.add(country);
+            }
+                return countries;
+        }
+        catch (Exception e)
+        {
+            // Displaying error message
+            System.out.println(e.getMessage());
+            System.out.println("Failed to get report29 details");
+            return null;
+        }
+    }
 }
