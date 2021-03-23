@@ -3,10 +3,8 @@ package Group3;
 import java.sql.*;
 import java.util.ArrayList;
 
-public class App
-{
-    public static void main(String[] args)
-    {
+public class App {
+    public static void main(String[] args) {
         // Create new Application
         App a = new App();
 
@@ -45,6 +43,7 @@ public class App
         // Disconnect from database
         a.disconnect();
     }
+
     /**
      * Connection to MySQL database.
      */
@@ -53,15 +52,11 @@ public class App
     /**
      * Connect to the MySQL database.
      */
-    public void connect()
-    {
-        try
-        {
+    public void connect() {
+        try {
             // Load Database driver
             Class.forName("com.mysql.jdbc.Driver");
-        }
-        catch (ClassNotFoundException e)
-        {
+        } catch (ClassNotFoundException e) {
             //Send error message
             System.out.println("Could not load SQL driver");
             System.exit(-1);
@@ -69,26 +64,20 @@ public class App
 
         int retries = 10;
         //for loop to try connecting to database 10 times
-        for (int i = 0; i < retries; ++i)
-        {
+        for (int i = 0; i < retries; ++i) {
             System.out.println("Connecting to database...");
-            try
-            {
+            try {
                 // Wait a bit for db to start
                 Thread.sleep(30000);
                 // Connect to database
                 con = DriverManager.getConnection("jdbc:mysql://db:3306/world?useSSL=false", "root", "example");
                 System.out.println("Successfully connected");
                 break;
-            }
-            catch (SQLException sqle)
-            {
+            } catch (SQLException sqle) {
                 //Displaying Error message
                 System.out.println("Failed to connect to database attempt " + Integer.toString(i));
                 System.out.println(sqle.getMessage());
-            }
-            catch (InterruptedException ie)
-            {
+            } catch (InterruptedException ie) {
                 //Displaying Error message
                 System.out.println("Thread interrupted? Should not happen.");
             }
@@ -98,17 +87,12 @@ public class App
     /**
      * Disconnect from the MySQL database.
      */
-    public void disconnect()
-    {
-        if (con != null)
-        {
-            try
-            {
+    public void disconnect() {
+        if (con != null) {
+            try {
                 // Close connection
                 con.close();
-            }
-            catch (Exception e)
-            {
+            } catch (Exception e) {
                 // Displaying error message when disconnecting error
                 System.out.println("Error closing connection to database");
             }
@@ -116,10 +100,8 @@ public class App
     }
 
     // Get city Method for getting city details
-    public City getCity(int ID)
-    {
-        try
-        {
+    public City getCity(int ID) {
+        try {
             // Create an SQL statement
             Statement stmt = con.createStatement();
             // Create string for SQL statement
@@ -131,8 +113,7 @@ public class App
             ResultSet rset = stmt.executeQuery(strSelect);
             // Return new City if valid.
             // Check one is returned
-            if (rset.next())
-            {
+            if (rset.next()) {
                 City cit = new City();
                 cit.ID = rset.getInt("ID");
                 cit.Name = rset.getString("Name");
@@ -140,12 +121,9 @@ public class App
                 cit.District = rset.getString("District");
                 cit.Population = rset.getInt("Population");
                 return cit;
-            }
-            else
+            } else
                 return null;
-        }
-        catch (Exception e)
-        {
+        } catch (Exception e) {
             // Displaying error message
             System.out.println(e.getMessage());
             System.out.println("Failed to get city details");
@@ -154,10 +132,8 @@ public class App
     }
 
     //Method for displaying city details
-    public void displayCity(City cit)
-    {
-        if (cit != null)
-        {
+    public void displayCity(City cit) {
+        if (cit != null) {
             System.out.println(
                     cit.ID + " "
                             + cit.Name + " "
@@ -168,10 +144,8 @@ public class App
     }
 
     //Method for getting County
-    public Country getCountry(int Capital)
-    {
-        try
-        {
+    public Country getCountry(int Capital) {
+        try {
             // Create an SQL statement
             Statement stmt = con.createStatement();
             // Create string for SQL statement
@@ -183,8 +157,7 @@ public class App
             ResultSet rset = stmt.executeQuery(strSelect);
             // Return new City if valid.
             // Check one is returned
-            if (rset.next())
-            {
+            if (rset.next()) {
                 Country country = new Country();
                 country.Code = rset.getString("Code");
                 country.Name = rset.getString("Name");
@@ -202,12 +175,9 @@ public class App
                 country.Capital = rset.getInt("Capital");
                 country.Code2 = rset.getString("Code2");
                 return country;
-            }
-            else
+            } else
                 return null;
-        }
-        catch (Exception e)
-        {
+        } catch (Exception e) {
             // Displaying error message
             System.out.println(e.getMessage());
             System.out.println("Failed to get country details");
@@ -216,10 +186,8 @@ public class App
     }
 
     //Method for displaying country details
-    public void displayCountry(Country country)
-    {
-        if (country != null)
-        {
+    public void displayCountry(Country country) {
+        if (country != null) {
             System.out.println(
                     country.Code + " "
                             + country.Name + " "
@@ -240,10 +208,8 @@ public class App
     }
 
     // Get city Method for getting city details
-    public CountryLanguage getLanguage(double Percentage)
-    {
-        try
-        {
+    public CountryLanguage getLanguage(double Percentage) {
+        try {
             // Create an SQL statement
             Statement stmt = con.createStatement();
             // Create string for SQL statement
@@ -255,20 +221,16 @@ public class App
             ResultSet rset = stmt.executeQuery(strSelect);
             // Return new City if valid.
             // Check one is returned
-            if (rset.next())
-            {
+            if (rset.next()) {
                 CountryLanguage cl = new CountryLanguage();
                 cl.CountryCode = rset.getString("CountryCode");
                 cl.Language = rset.getString("Language");
                 cl.IsOfficial = rset.getString("IsOfficial");
                 cl.Percentage = rset.getDouble("Percentage");
                 return cl;
-            }
-            else
+            } else
                 return null;
-        }
-        catch (Exception e)
-        {
+        } catch (Exception e) {
             // Displaying error message
             System.out.println(e.getMessage());
             System.out.println("Failed to get country language details");
@@ -277,10 +239,8 @@ public class App
     }
 
     //Method for displaying countrylanguage details
-    public void displayLanguage(CountryLanguage cl)
-    {
-        if (cl != null)
-        {
+    public void displayLanguage(CountryLanguage cl) {
+        if (cl != null) {
             System.out.println(
                     cl.CountryCode + " "
                             + cl.Language + " "
@@ -290,10 +250,8 @@ public class App
     }
 
     //Method for report 25
-    public Country getReport26(char[] region)
-    {
-        try
-        {
+    public Country getReport26(char[] region) {
+        try {
             // Create an SQL statement
             Statement stmt = con.createStatement();
             // Create string for SQL statement
@@ -301,24 +259,20 @@ public class App
                     "SELECT Name, Population, Region"
                             + "FROM country "
                             + "WHERE Region = " + region;
-                            //+ "ORDER BY Population ASC";
+            //+ "ORDER BY Population ASC";
             // Execute SQL statement
             ResultSet rset = stmt.executeQuery(strSelect);
             // Return new City if valid.
             // Check one is returned
-            if (rset.next())
-            {
+            if (rset.next()) {
                 Country country = new Country();
                 country.Name = rset.getString("Name");
                 country.Continent = rset.getString("Continent");
                 country.Population = rset.getInt("Region");
                 return country;
-            }
-            else
+            } else
                 return null;
-        }
-        catch (Exception e)
-        {
+        } catch (Exception e) {
             // Displaying error message
             System.out.println(e.getMessage());
             System.out.println("Failed to get report26 details");
@@ -327,10 +281,8 @@ public class App
     }
 
 
-    public ArrayList<Country> getReport25(String continent)
-    {
-        try
-        {
+    public ArrayList<Country> getReport25(String continent) {
+        try {
             // Create an SQL statement
             Statement stmt = con.createStatement();
             // Create string for SQL statement
@@ -343,8 +295,7 @@ public class App
             // Return new City if valid.
             // Check one is returned
             ArrayList<Country> countries = new ArrayList<Country>();
-            while (rset.next())
-            {
+            while (rset.next()) {
                 Country country = new Country();
                 country.Code = rset.getString("Code");
                 country.Name = rset.getString("Name");
@@ -364,9 +315,7 @@ public class App
                 countries.add(country);
             }
             return countries;
-        }
-        catch (Exception e)
-        {
+        } catch (Exception e) {
             // Displaying error message
             System.out.println(e.getMessage());
             System.out.println("Failed to get report25 details");
@@ -414,17 +363,14 @@ public class App
     }
      */
 
-    public void printCountries(ArrayList<Country> countries)
-    {
-        if (countries == null)
-        {
+    public void printCountries(ArrayList<Country> countries) {
+        if (countries == null) {
             System.out.println("No countries");
             return;
         }
         System.out.println(String.format("%s - %s - %s - %s - %s - %s - %s - %s - %s - %s - %s - %s - %s - %s - %s", "Code", "Name", "Continent", "Region", "SurfaceArea", "IndepYear", "Population", "LifeExpectancy", "GNP", "GNPOld", "LocalName", "GovernmentForm", "HeadOfState", "Capital", "Code2"));
-        for (Country country : countries)
-        {
-            if(country == null)
+        for (Country country : countries) {
+            if (country == null)
                 continue;
             String countryString = String.format("%s - %s - %s - %s - %s - %s - %s - %s - %s - %s - %s - %s - %s - %s - %s", country.Code, country.Name, country.Continent, country.Region, country.SurfaceArea, country.IndepYear, country.Population, country.LifeExpectancy, country.GNP, country.OldGNP, country.LocalName, country.GovernmentForm, country.HeadOfState, country.Capital, country.Code2);
             System.out.println(countryString);
@@ -432,11 +378,8 @@ public class App
     }
 
 
-
-    public Country getReport28(String continent, int num)
-    {
-        try
-        {
+    public Country getReport28(String continent, int num) {
+        try {
             // Create an SQL statement
             Statement stmt = con.createStatement();
             // Create string for SQL statement
@@ -450,19 +393,15 @@ public class App
             ResultSet rset = stmt.executeQuery(strSelect);
             // Return new City if valid.
             // Check one is returned
-            if (rset.next())
-            {
+            if (rset.next()) {
                 Country country = new Country();
                 country.Name = rset.getString("Name");
                 country.Continent = rset.getString("Continent");
                 country.Population = rset.getInt("Population");
                 return country;
-            }
-            else
+            } else
                 return null;
-        }
-        catch (Exception e)
-        {
+        } catch (Exception e) {
             // Displaying error message
             System.out.println(e.getMessage());
             System.out.println("Failed to get report28 details");
@@ -471,10 +410,8 @@ public class App
     }
 
 
-    public ArrayList<Country> getReport29(String region, int n)
-    {
-        try
-        {
+    public ArrayList<Country> getReport29(String region, int n) {
+        try {
             // Create an SQL statement
             Statement stmt = con.createStatement();
             // Create string for SQL statement
@@ -500,14 +437,45 @@ public class App
                 country.Capital = rset.getInt("Capital");
                 countries.add(country);
             }
-                return countries;
-        }
-        catch (Exception e)
-        {
+            return countries;
+        } catch (Exception e) {
             // Displaying error message
             System.out.println(e.getMessage());
             System.out.println("Failed to get report29 details");
             return null;
         }
     }
+
+
+    public ArrayList<City> getReport32(String region) {
+        try {
+            // Create an SQL statement
+            Statement stmt = con.createStatement();
+            // Create string for SQL statement
+            String strSelect =
+                    "SELECT Name, Population"
+                            + "FROM city "
+                            + "WHERE Region = " + region
+                            + "ORDER BY Population DESC";
+            // Execute SQL statement
+            ResultSet rset = stmt.executeQuery(strSelect);
+            // Create array list to store countries
+            ArrayList<City> cities = new ArrayList<>();
+            // Return new city if valid.
+            // Check one is returned
+            while (rset.next()) {
+                City city = new City();
+                city.Name = rset.getString("Name");
+                city.Population = rset.getInt("Population");
+                cities.add(city);
+            }
+            return cities;
+        } catch (Exception e) {
+            // Displaying error message
+            System.out.println(e.getMessage());
+            System.out.println("Failed to get report32 details");
+            return null;
+        }
+    }
+
 }
