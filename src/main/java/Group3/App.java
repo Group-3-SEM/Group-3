@@ -495,6 +495,8 @@ public class App {
 			    "SELECT Name, Population"
 			    	+ "FROM country"
 			    	+ "ORDER BY Population DESC";
+	    // Execute SQL statement
+            ResultSet rset = stmt.executeQuery(strSelect);
 
 	    }
 	    catch (Exception e)
