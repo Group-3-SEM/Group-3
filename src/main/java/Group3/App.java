@@ -25,7 +25,11 @@ public class App {
         CountryLanguage cl = a.getLanguage(0.1);
         //Display Details
         a.displayLanguage(cl);
-
+        
+        //Displaying report 24
+        report24 = a.getReport24;
+        a.printCountries(report24);
+        
         //Displaying report 25
         ArrayList<Country> report25 = a.getReport25("Africa");
         a.printCountries(report25);
@@ -39,7 +43,7 @@ public class App {
         //Displaying report 28
         Country report28 = a.getReport28("Africa", 5);
         a.displayCountry(report28);
-
+        
         // Disconnect from database
         a.disconnect();
     }
@@ -478,4 +482,28 @@ public class App {
         }
     }
 
+    public Country getReport24()
+    {
+	    try
+	    {
+		    //create an SQL statement
+		    Staetment stmt = con.createStatement();
+		    // Create string for SQL statement
+		    String strSelect =
+			    //Selecting the name and ordering by the
+			    //population from largest to smallest
+			    "SELECT Name, Population"
+			    	+ "FROM country"
+			    	+ "ORDER BY Population DESC";
+
+	    }
+	    catch (Exception e)
+	    {
+	        // Displaying error message
+	        System.out.println(e.getMessage());
+	        System.out.println("Failed to get report24 details");
+	        return null;
+	    }
+    }
+    
 }
