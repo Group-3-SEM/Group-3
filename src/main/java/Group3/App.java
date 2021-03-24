@@ -26,10 +26,6 @@ public class App {
         //Display Details
         a.displayLanguage(cl);
         
-        //Displaying report 24
-	//ArrayList<country> report24 = a.getReport24();
-        //a.printCountries(report24);
-        
         //Displaying report 25
         ArrayList<Country> report25 = a.getReport25("Africa");
         a.printCountries(report25);
@@ -482,7 +478,7 @@ public class App {
         }
     }
 
-    public ArrayList<Country> getReport24(String country)
+    public getReport24()
     {
 	    try
 	    {
