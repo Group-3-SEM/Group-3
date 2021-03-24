@@ -482,7 +482,7 @@ public class App {
         }
     }
 
-    public ArrayList<Country> getReport24(String country){
+    public ArrayList<Country> getReport24(Country countries){
 	 try
 	    {
 		    //create an SQL statement
@@ -500,8 +500,8 @@ public class App {
 	    ArrayList<Country> countries = new ArrayList<>();
 		while (rset.next()) {
                 	Country country = new Country();
-                	country.Name = rset.getString("Name");
-               		 country.Population = rset.getInt("Population");
+                	Country().Name = rset.getString("Name");
+               		 Country().Population = rset.getInt("Population");
                 	countries.add(country);
            	 }
 	   	  return countries;
