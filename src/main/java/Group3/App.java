@@ -136,15 +136,18 @@ public class App
     //Method for displaying city details
     public void displayCity(City cit)
     {
-        if (cit != null)
+        if (cit == null)
         {
-            System.out.println(
-                    cit.ID + " "
-                            + cit.Name + " "
-                            + cit.CountryCode + "\n"
-                            + cit.District + "\n"
-                            + cit.Population + "\n");
+            System.out.println("No records");
+            return;
         }
+
+        System.out.println(
+                cit.ID + " "
+                        + cit.Name + " "
+                        + cit.CountryCode + "\n"
+                        + cit.District + "\n"
+                        + cit.Population + "\n");
     }
 
     //Method for getting County
@@ -198,25 +201,28 @@ public class App
     //Method for displaying country details
     public void displayCountry(Country country)
     {
-        if (country != null)
+        if (country == null)
         {
-            System.out.println(
-                    country.Code + " "
-                            + country.Name + " "
-                            + country.Continent + "\n"
-                            + country.Region + "\n"
-                            + country.SurfaceArea + "\n"
-                            + country.IndepYear + "\n"
-                            + country.Population + "\n"
-                            + country.LifeExpectancy + "\n"
-                            + country.GNP + "\n"
-                            + country.OldGNP + "\n"
-                            + country.LocalName + "\n"
-                            + country.GovernmentForm + "\n"
-                            + country.HeadOfState + "\n"
-                            + country.Capital + "\n"
-                            + country.Code2 + "\n");
+            System.out.println("No records");
+            return;
         }
+
+        System.out.println(
+                country.Code + " "
+                        + country.Name + " "
+                        + country.Continent + "\n"
+                        + country.Region + "\n"
+                        + country.SurfaceArea + "\n"
+                        + country.IndepYear + "\n"
+                        + country.Population + "\n"
+                        + country.LifeExpectancy + "\n"
+                        + country.GNP + "\n"
+                        + country.OldGNP + "\n"
+                        + country.LocalName + "\n"
+                        + country.GovernmentForm + "\n"
+                        + country.HeadOfState + "\n"
+                        + country.Capital + "\n"
+                        + country.Code2 + "\n");
     }
 
     // Get city Method for getting city details
@@ -259,14 +265,17 @@ public class App
     //Method for displaying countrylanguage details
     public void displayLanguage(CountryLanguage cl)
     {
-        if (cl != null)
+        if (cl == null)
         {
-            System.out.println(
-                    cl.CountryCode + " "
-                            + cl.Language + " "
-                            + cl.IsOfficial + "\n"
-                            + cl.Percentage + "\n");
+            System.out.println("No records");
+            return;
         }
+
+        System.out.println(
+                cl.CountryCode + " "
+                        + cl.Language + " "
+                        + cl.IsOfficial + "\n"
+                        + cl.Percentage + "\n");
     }
 
     //All the cities in the world organised by largest population to smallest.

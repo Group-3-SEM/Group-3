@@ -10,9 +10,41 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class UnitTest
 {
-    @Test
-    void unitTest()
+    static App app;
+
+    @BeforeAll
+    static void init()
     {
-        assertEquals(5, 5);
+        app = new App();
+    }
+
+    @Test
+    void displayLanguageTestNull()
+    {
+        app.displayLanguage(null);
+    }
+
+    @Test
+    void displayCitiesTestNull()
+    {
+        app.displayCities(null);
+    }
+    @Test
+    void displayCitiesTestEmpty()
+    {
+        ArrayList<City> cities = new ArrayList<>();
+        app.displayCities(cities);
+    }
+
+    @Test
+    void displayCityTestNull()
+    {
+        app.displayCity(null);
+    }
+
+    @Test
+    void displayCountryTestNull()
+    {
+        app.displayCountry(null);
     }
 }
