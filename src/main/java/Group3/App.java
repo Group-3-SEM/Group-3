@@ -27,7 +27,7 @@ public class App {
         a.displayLanguage(cl);
         
         //Displaying report 24
-        report24 = a.getReport24;
+        Country report24 = a.getReport24();
         a.printCountries(report24);
         
         //Displaying report 25
