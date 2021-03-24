@@ -482,7 +482,7 @@ public class App {
         }
     }
 
-    public ArrayList<Country> getReport24(Country countries){
+    public ArrayList<Country> getReport24(String region){
 	 try
 	    {
 		    //create an SQL statement
