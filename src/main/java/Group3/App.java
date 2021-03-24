@@ -40,6 +40,9 @@ public class App {
         Country report28 = a.getReport28("Africa", 5);
         a.displayCountry(report28);
         
+	//Display report 24    
+	Country report24
+	    
         // Disconnect from database
         a.disconnect();
     }
@@ -478,12 +481,11 @@ public class App {
         }
     }
 
-    public getReport24()
-    {
-	    try
+    public ArrayList<Country> getReport24(String country){
+	 try
 	    {
 		    //create an SQL statement
-		    Staetment stmt = con.createStatement();
+		    Statement stmt = con.createStatement();
 		    // Create string for SQL statement
 		    String strSelect =
 			    //Selecting the name and ordering by the
