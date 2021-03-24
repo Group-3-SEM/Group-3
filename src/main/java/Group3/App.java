@@ -11,28 +11,20 @@ public class App
         App a = new App();
 
         // Connect to database
-        a.connect("localhost:33060");
+        if (args.length < 1)
+        {
+            a.connect("localhost:33060");
+        }
+        else
+        {
+            a.connect(args[0]);
+        }
 
         //Get cities
-        ArrayList<City> cities = a.report14();
+        ArrayList<City> cities = a.report10();
 
         //Display cities
         a.displayCities(cities);
-
-        // Get city
-        //City cit = a.getCity(2);
-        // Display results
-        //a.displayCity(cit);
-
-        // Get country
-        //Country country = a.getCountry(1);
-        //Display Details
-        //a.displayCountry(country);
-
-        //Get country Language
-        //CountryLanguage cl = a.getLanguage(0.1);
-        //Display Details
-        //a.displayLanguage(cl);
 
         // Disconnect from database
         a.disconnect();
@@ -156,7 +148,7 @@ public class App
     }
 
     //Method for getting County
-    public Country getCountry(int Capital)
+    public Country getCountry(String Code)
     {
         try
         {
@@ -166,7 +158,7 @@ public class App
             String strSelect =
                     "SELECT Code, Name, Continent, Region, SurfaceArea, IndepYear, Population, LifeExpectancy, GNP, GNPOld, LocalName, GovernmentForm, HeadOfState, Capital, Code2 "
                             + "FROM country "
-                            + "WHERE Capital = " + Capital;
+                            + "WHERE Code = " + "'" + Code + "'";
             // Execute SQL statement
             ResultSet rset = stmt.executeQuery(strSelect);
             // Return new City if valid.
@@ -228,7 +220,7 @@ public class App
     }
 
     // Get city Method for getting city details
-    public CountryLanguage getLanguage(double Percentage)
+    public CountryLanguage getLanguage(String CountryCode)
     {
         try
         {
@@ -238,7 +230,7 @@ public class App
             String strSelect =
                     "SELECT CountryCode, Language, IsOfficial, Percentage "
                             + "FROM countrylanguage "
-                            + "WHERE Percentage = " + Percentage;
+                            + "WHERE CountryCode = " + "'" + CountryCode + "'";
             // Execute SQL statement
             ResultSet rset = stmt.executeQuery(strSelect);
             // Return new City if valid.
