@@ -491,7 +491,7 @@ public class App {
 		    String strSelect =
 			    //Selecting the name and ordering by the
 			    //population from largest to smallest
-			    "SELECT Name, Population"
+			    "SELECT Code, Name, Continent, Region, SurfaceArea, IndepYear, Population, LifeExpectancy, GNP, GNPOld, LocalName, GovernmentForm, HeadOfState, Capital, Code2 "
 			    	+ "FROM country"
 			    	+ "ORDER BY Population DESC";
 	    // Execute SQL statement
