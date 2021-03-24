@@ -41,8 +41,8 @@ public class App {
         a.displayCountry(report28);
         
 	//Display report 24    
-	ArrayList<country> report24 = a.getReport24("Africa");
-	a.printcountrie(report24);
+	ArrayList<Country> report24 = a.getReport24("Africa");
+	a.printCountries(report24);
 	    
         // Disconnect from database
         a.disconnect();
