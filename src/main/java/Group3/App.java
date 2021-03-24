@@ -28,7 +28,6 @@ public class App {
         
         //Displaying report 24
         Country report24 = a.getReport24();
-        a.printCountries(report24);
         
         //Displaying report 25
         ArrayList<Country> report25 = a.getReport25("Africa");
