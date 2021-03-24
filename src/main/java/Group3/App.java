@@ -27,8 +27,8 @@ public class App {
         a.displayLanguage(cl);
         
         //Displaying report 24
-	ArrayList<country> report24 = a.getReport24();
-        a.printCountries(report24);
+	//ArrayList<country> report24 = a.getReport24();
+        //a.printCountries(report24);
         
         //Displaying report 25
         ArrayList<Country> report25 = a.getReport25("Africa");
@@ -505,8 +505,8 @@ public class App {
                		 country.Population = rset.getInt("Population");
                 	countries.add(country);
            	 }
-	   	 }
-	   	 return countries;
+	   	  return countries;
+	   	}
 	    catch (Exception e)
 	    {
 	        // Displaying error message
