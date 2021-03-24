@@ -27,7 +27,8 @@ public class App {
         a.displayLanguage(cl);
         
         //Displaying report 24
-        Country report24 = a.getReport24();
+	ArrayList<country> report24 = a.getReport24();
+        a.printCountries(report24);
         
         //Displaying report 25
         ArrayList<Country> report25 = a.getReport25("Africa");
@@ -481,7 +482,7 @@ public class App {
         }
     }
 
-    public Country getReport24()
+    public ArrayList<Country> getReport24(String country)
     {
 	    try
 	    {
@@ -496,8 +497,16 @@ public class App {
 			    	+ "ORDER BY Population DESC";
 	    // Execute SQL statement
             ResultSet rset = stmt.executeQuery(strSelect);
-
-	    }
+	    //Creating an array list for the countries
+	    ArrayList<Country> countries = new ArrayList<>();
+		while (rset.next()) {
+                	Country country = new Country();
+                	country.Name = rset.getString("Name");
+               		 country.Population = rset.getInt("Population");
+                	countries.add(country);
+           	 }
+	   	 }
+	   	 return countries;
 	    catch (Exception e)
 	    {
 	        // Displaying error message
