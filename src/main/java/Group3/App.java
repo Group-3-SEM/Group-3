@@ -2,29 +2,44 @@ package Group3;
 //defining imports
 import java.sql.*;
 import java.util.*;
+import java.util.Scanner;
 
 public class App
 {
-    public static void main(String[] args)
-    {
+    public static void main(String[] args){
         // Create new Application
         App a = new App();
 
         // Connect to database
-        if (args.length < 1)
+        a.connect("localhost:33060");
+
+
+        int ReportNum = 0;
+        Scanner sc = new Scanner(System.in);
+
+        System.out.println("Enter the report you want to run");
+        ReportNum = sc.nextInt();
+
+        while (true)
         {
-            a.connect("localhost:33060");
-        }
-        else
-        {
-            a.connect(args[0]);
+            if(ReportNum >0 && ReportNum <40) {
+                break;
+            }else{
+                System.out.println("Please enter a valid Report Number");
+                ReportNum = sc.nextInt();
+            }
         }
 
-        //Get cities
-        ArrayList<City> cities = a.report10();
 
-        //Display cities
-        a.displayCities(cities);
+        //if statement to get report
+        if(ReportNum == 10){
+
+            ArrayList<City> cities = a.report10();
+            //Display cities
+            a.displayCities(cities);
+
+        }
+
 
         // Disconnect from database
         a.disconnect();
