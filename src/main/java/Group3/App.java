@@ -21,7 +21,7 @@ public class App
         }
 
         //Get cities
-        ArrayList<City> cities = a.report10();
+        ArrayList<City> cities = a.report20();
 
         //Display cities
         a.displayCities(cities);
@@ -278,7 +278,9 @@ public class App
                         + cl.Percentage + "\n");
     }
 
-    //All the cities in the world organised by largest population to smallest.
+    /**
+     * All the cities in the world organised by largest population to smallest.
+     */
     public ArrayList<City> report7(){
         //Initialization
         ArrayList<City> cityList = new ArrayList<>();
@@ -317,7 +319,9 @@ public class App
 
     }
 
-    //All the cities in a country organised by largest population to smallest.
+    /**
+     * All the cities in a country organised by largest population to smallest.
+     */
     public ArrayList<City> report10(){
         //Initialization
         ArrayList<City> cityList = new ArrayList<>();
@@ -417,7 +421,9 @@ public class App
 
     }
 
-    //All the cities in a district organised by largest population to smallest.
+    /**
+     * All the cities in a district organised by largest population to smallest.
+     */
     public ArrayList<City> report11() {
         //Initialization
         ArrayList<City> cityList = new ArrayList<>();
@@ -498,21 +504,16 @@ public class App
 
     }
 
-    //The top N populated cities in the world where N is provided by the user.
+    /**
+     * The top N populated cities in the world where N is provided by the user.
+     */
     public ArrayList<City> report12(){
         //Initialization
         ArrayList<City> cityList = new ArrayList<>();
         Scanner sc = new Scanner(System.in);
-        int input;
 
         System.out.println("Enter the number of cities you would like to print");
-        //Ensures that the input only contains numbers
-        while(!sc.hasNextInt())
-        {
-            System.out.println("Please enter a number");
-            sc.next();
-        }
-        input = sc.nextInt();
+        int input = validateInputForInt();
 
         try
         {
@@ -550,72 +551,19 @@ public class App
 
     }
 
-    //All the capital cities in the world organised by largest population to smallest.
-    public ArrayList<City> report17(){
-        //Initialization
-        ArrayList<City> cityList = new ArrayList<>();
-
-        try
-        {
-            // Create an SQL statement
-            Statement stmt = con.createStatement();
-            // Create string for SQL statement
-            String strSelect =
-                    "SELECT ID, city.Name, CountryCode, District, city.Population "
-                            + "FROM city "
-                            + "JOIN country ON city.ID = country.Capital "
-                            + "ORDER BY Population DESC";
-            // Execute SQL statement
-            ResultSet rset = stmt.executeQuery(strSelect);
-
-            // Check one is returned
-            while (rset.next())
-            {
-                City tempCity = new City();
-                tempCity.ID = rset.getInt("ID");
-                tempCity.Name = rset.getString("Name");
-                tempCity.CountryCode = rset.getString("CountryCode");
-                tempCity.District = rset.getString("District");
-                tempCity.Population = rset.getInt("Population");
-                cityList.add(tempCity);
-            }
-            return cityList;
-        }
-        catch (Exception e)
-        {
-            System.out.println(e.getMessage());
-            System.out.println("Failed to get city details");
-            return null;
-        }
-    }
-
+    /**
+     * The top N populated cities in a continent where N is provided by the user.
+     */
     public ArrayList<City> report14(){
         //Initialization
         ArrayList<City> cityList = new ArrayList<>();
         Scanner sc = new Scanner(System.in);
 
-
         System.out.println("Enter the number of cities you would like to print");
-        //Ensures that the input only contains numbers
-        while(!sc.hasNextInt())
-        {
-            System.out.println("Please enter a number");
-            sc.next();
-        }
-        int numInput = sc.nextInt();
+        int numInput = validateInputForInt();
 
         System.out.println("Enter the continent you would like to search within");
-        String input = sc.nextLine();
-        //Ensures that there are only letters in the input
-        while (true)
-        {
-            if(input.matches("[a-zA-Z]+"))
-                break;
-            else {
-                System.out.println("Please enter a valid continent");
-                input = sc.nextLine();
-            }
-        }
+        String input = validateStringInput();
 
         //Checks whether the continent is within the database
         try
@@ -630,19 +578,11 @@ public class App
             // Execute SQL statement
             ResultSet rset = stmt.executeQuery(strSelect);
 
-            //If no records are returned then you'll be asked to enter another country code and that will be validated
+            //If no records are returned then you'll be asked to enter another continent and that will be validated
             while(!rset.next())
             {
                 System.out.println("Continent does not exist. Try again");
-                while (true)
-                {
-                    if(input.matches("[a-zA-Z]+"))
-                        break;
-                    else {
-                        System.out.println("Please enter a valid continent");
-                        input = sc.nextLine();
-                    }
-                }
+                input = validateStringInput();
 
                 // Create string for SQL statement
                 strSelect =
@@ -698,6 +638,221 @@ public class App
 
     }
 
+    /**
+     * All the capital cities in the world organised by largest population to smallest.
+     */
+    public ArrayList<City> report17(){
+        //Initialization
+        ArrayList<City> cityList = new ArrayList<>();
+
+        try
+        {
+            // Create an SQL statement
+            Statement stmt = con.createStatement();
+            // Create string for SQL statement
+            String strSelect =
+                    "SELECT ID, city.Name, CountryCode, District, city.Population "
+                            + "FROM city "
+                            + "JOIN country ON city.ID = country.Capital "
+                            + "ORDER BY Population DESC";
+            // Execute SQL statement
+            ResultSet rset = stmt.executeQuery(strSelect);
+
+            // Check one is returned
+            while (rset.next())
+            {
+                City tempCity = new City();
+                tempCity.ID = rset.getInt("ID");
+                tempCity.Name = rset.getString("Name");
+                tempCity.CountryCode = rset.getString("CountryCode");
+                tempCity.District = rset.getString("District");
+                tempCity.Population = rset.getInt("Population");
+                cityList.add(tempCity);
+            }
+            return cityList;
+        }
+        catch (Exception e)
+        {
+            System.out.println(e.getMessage());
+            System.out.println("Failed to get city details");
+            return null;
+        }
+    }
+
+    /**
+     * The top N populated capital cities in the world where N is provided by the user.
+     */
+    public ArrayList<City> report20()
+    {
+        //Initialization
+        ArrayList<City> cityList = new ArrayList<>();
+        Scanner sc = new Scanner(System.in);
+
+        System.out.println("Enter the number of capital cities you would like to print");
+        int numInput = validateInputForInt();
+
+        try
+        {
+            // Create an SQL statement
+            Statement stmt = con.createStatement();
+            // Create string for SQL statement
+            String strSelect =
+                    "SELECT ID, city.Name, CountryCode, District, city.Population "
+                            + "FROM city "
+                            + "JOIN country ON city.ID = country.Capital "
+                            + "ORDER BY Population DESC "
+                            + "LIMIT " + numInput;
+            // Execute SQL statement
+            ResultSet rset = stmt.executeQuery(strSelect);
+
+            // Return new City if valid.
+            // Check one is returned
+            while (rset.next())
+            {
+                City tempCity = new City();
+                tempCity.ID = rset.getInt("ID");
+                tempCity.Name = rset.getString("Name");
+                tempCity.CountryCode = rset.getString("CountryCode");
+                tempCity.District = rset.getString("District");
+                tempCity.Population = rset.getInt("Population");
+                cityList.add(tempCity);
+            }
+            return cityList;
+        }
+        catch (Exception e)
+        {
+            System.out.println(e.getMessage());
+            System.out.println("Failed to get city details");
+            return null;
+        }
+    }
+
+    /**
+     * The top N populated capital cities in a region where N is provided by the user.
+     */
+    public ArrayList<City> report22()
+    {
+        //Initialization
+        ArrayList<City> cityList = new ArrayList<>();
+        Scanner sc = new Scanner(System.in);
+
+        System.out.println("Enter the number of capital cities you would like to print");
+        int numInput = validateInputForInt();
+
+        System.out.println("Enter the region you would like to search within");
+        String input = validateStringInput();
+
+        //Checks whether the region is within the database
+        try
+        {
+            // Create an SQL statement
+            Statement stmt = con.createStatement();
+            // Create string for SQL statement
+            String strSelect =
+                    "SELECT Region "
+                            + "FROM country "
+                            + "WHERE Region = " + "'" + input + "'";
+            // Execute SQL statement
+            ResultSet rset = stmt.executeQuery(strSelect);
+
+            //If no records are returned then you'll be asked to enter another region and that will be validated
+            while(!rset.next())
+            {
+                System.out.println("Region does not exist. Try again");
+                input = validateStringInput();
+
+                // Create string for SQL statement
+                strSelect =
+                        "SELECT Region "
+                                + "FROM country "
+                                + "WHERE Region = " + "'" + input + "'";
+                // Execute SQL statement
+                rset = stmt.executeQuery(strSelect);
+            }
+        }
+        catch (Exception e)
+        {
+            System.out.println(e.getMessage());
+            System.out.println("Failed to get city details");
+            return null;
+        }
+
+        try
+        {
+            // Create an SQL statement
+            Statement stmt = con.createStatement();
+            // Create string for SQL statement
+            String strSelect =
+                    "SELECT ID, city.Name, CountryCode, District, city.Population "
+                            + "FROM city "
+                            + "JOIN country ON city.ID = country.Capital "
+                            + "WHERE Region = " + "'" + input + "'"
+                            + "ORDER BY Population DESC "
+                            + "LIMIT " + numInput;
+            // Execute SQL statement
+            ResultSet rset = stmt.executeQuery(strSelect);
+
+            // Return new City if valid.
+            // Check one is returned
+            while (rset.next())
+            {
+                City tempCity = new City();
+                tempCity.ID = rset.getInt("ID");
+                tempCity.Name = rset.getString("Name");
+                tempCity.CountryCode = rset.getString("CountryCode");
+                tempCity.District = rset.getString("District");
+                tempCity.Population = rset.getInt("Population");
+                cityList.add(tempCity);
+            }
+            return cityList;
+        }
+        catch (Exception e)
+        {
+            System.out.println(e.getMessage());
+            System.out.println("Failed to get city details");
+            return null;
+        }
+    }
+
+    /**
+     * @return scan.nextInt()
+     * Ensures that the input only contains numbers
+     */
+    public int validateInputForInt()
+    {
+        Scanner scan = new Scanner(System.in);
+
+        while(!scan.hasNextInt())
+        {
+            System.out.println("Please enter a number");
+            scan.next();
+        }
+        return Integer.parseInt(scan.nextLine());
+    }
+
+    /**
+     * @return input
+     * Ensures that there are only letters in the input
+     */
+    public String validateStringInput()
+    {
+        Scanner scan = new Scanner(System.in);
+        String input;
+
+        input = scan.nextLine();
+
+        while (true)
+        {
+            if(input.matches("[a-zA-Z_ ]+"))
+                break;
+            else {
+                System.out.println("Please enter a valid input");
+                input = scan.nextLine();
+            }
+        }
+        return input;
+    }
+
     public void displayCities(ArrayList<City> cities)
     {
         if(cities == null)
@@ -714,8 +869,8 @@ public class App
             if(cit == null)
                 continue;
             String cit_string = String.format("%-10s %-15s %-20s %-25s %-30s",
-                                        cit.ID, cit.Name, cit.CountryCode, cit.District, cit.Population);
-                System.out.println(cit_string);
+                    cit.ID, cit.Name, cit.CountryCode, cit.District, cit.Population);
+            System.out.println(cit_string);
         }
     }
 }
