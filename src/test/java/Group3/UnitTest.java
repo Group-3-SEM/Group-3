@@ -29,6 +29,7 @@ public class UnitTest
     {
         app.displayCities(null);
     }
+
     @Test
     void displayCitiesTestEmpty()
     {
