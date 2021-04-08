@@ -13,97 +13,21 @@ public class App
         // Connect to database
         a.connect("localhost:33060");
 
-
-        int ReportNum = 0;
-        Scanner sc = new Scanner(System.in);
-
         System.out.println("Enter the report you want to run");
-        ReportNum = sc.nextInt();
 
         while (true)
         {
+            int ReportNum = a.validateIntInput();
+
             if(ReportNum >0 && ReportNum <40) {
+                a.reportSelect(ReportNum);
                 break;
             }else{
                 System.out.println("Please enter a valid Report Number");
-                ReportNum = sc.nextInt();
             }
         }
 
-
-        //if statement to get report
-        if(ReportNum == 10){
-
-            ArrayList<City> cities = a.report10();
-            //Display cities
-            a.displayCities(cities);
-        }
-
-        //This is report 10 just making use of New Method
-        if(ReportNum == 11){
-            Scanner sc20 = new Scanner(System.in);
-
-            System.out.println("Enter the city you would like to search within");
-            String input20 = sc20.nextLine();
-
-            String str =
-                    "SELECT CountryCode "
-                            + "FROM city "
-                            + "WHERE CountryCode = " + "'" + input20 + "'";
-            String str1 =
-                    "SELECT ID, Name, CountryCode, District, Population "
-                            + "FROM city "
-                            + "WHERE CountryCode = " + "'" + input20 + "'"
-                            + "ORDER BY Population DESC";
-
-            ArrayList<City> cities = a.CityStatement(str,str1);
-            a.displayCities(cities);
-        }
-
-        //Report 25
-        if(ReportNum == 25){
-            Scanner s = new Scanner(System.in);
-
-            System.out.println("Enter the Continent you would like to search within");
-            String input = s.nextLine();
-
-            String str =
-                    "SELECT Population "
-                            + "FROM country "
-                            + "WHERE Continent = " + "'" + input + "'";
-
-            String str1 =
-                    "SELECT Code, Name, Continent, Region, SurfaceArea, IndepYear, Population, LifeExpectancy, GNP, GNPOld, LocalName, GovernmentForm, HeadOfState, Capital, Code2 "
-                            + "FROM country "
-                            + "WHERE Continent = " + "'" + input + "'"
-                            + "ORDER BY Population DESC";
-
-            ArrayList<Country> countries = a.CountryStatement(str, str1);
-            a.displayCountries(countries);
-        }
-
-        //Report 26
-        if(ReportNum == 26){
-            Scanner s = new Scanner(System.in);
-
-            System.out.println("Enter the Region you would like to search within");
-            String input = s.nextLine();
-
-            String str =
-                    "SELECT Population "
-                            + "FROM country "
-                            + "WHERE Region = " + "'" + input + "'";
-
-            String str1 =
-                    "SELECT Code, Name, Continent, Region, SurfaceArea, IndepYear, Population, LifeExpectancy, GNP, GNPOld, LocalName, GovernmentForm, HeadOfState, Capital, Code2 "
-                            + "FROM country "
-                            + "WHERE Region = " + "'" + input + "'"
-                            + "ORDER BY Population DESC";
-
-            ArrayList<Country> countries = a.CountryStatement(str, str1);
-            a.displayCountries(countries);
-        }
-
+        a.displayCities(ci);
 
         // Disconnect from database
         a.disconnect();
@@ -573,7 +497,7 @@ public class App
         Scanner sc = new Scanner(System.in);
 
         System.out.println("Enter the number of cities you would like to print");
-        int input = validateInputForInt();
+        int input = validateIntInput();
 
         try
         {
@@ -620,7 +544,7 @@ public class App
         Scanner sc = new Scanner(System.in);
 
         System.out.println("Enter the number of cities you would like to print");
-        int numInput = validateInputForInt();
+        int numInput = validateIntInput();
 
         System.out.println("Enter the continent you would like to search within");
         String input = validateStringInput();
@@ -749,7 +673,7 @@ public class App
         Scanner sc = new Scanner(System.in);
 
         System.out.println("Enter the number of capital cities you would like to print");
-        int numInput = validateInputForInt();
+        int numInput = validateIntInput();
 
         try
         {
@@ -797,45 +721,10 @@ public class App
         Scanner sc = new Scanner(System.in);
 
         System.out.println("Enter the number of capital cities you would like to print");
-        int numInput = validateInputForInt();
+        int numInput = validateIntInput();
 
         System.out.println("Enter the region you would like to search within");
-        String input = validateStringInput();
-
-        //Checks whether the region is within the database
-        try
-        {
-            // Create an SQL statement
-            Statement stmt = con.createStatement();
-            // Create string for SQL statement
-            String strSelect =
-                    "SELECT Region "
-                            + "FROM country "
-                            + "WHERE Region = " + "'" + input + "'";
-            // Execute SQL statement
-            ResultSet rset = stmt.executeQuery(strSelect);
-
-            //If no records are returned then you'll be asked to enter another region and that will be validated
-            while(!rset.next())
-            {
-                System.out.println("Region does not exist. Try again");
-                input = validateStringInput();
-
-                // Create string for SQL statement
-                strSelect =
-                        "SELECT Region "
-                                + "FROM country "
-                                + "WHERE Region = " + "'" + input + "'";
-                // Execute SQL statement
-                rset = stmt.executeQuery(strSelect);
-            }
-        }
-        catch (Exception e)
-        {
-            System.out.println(e.getMessage());
-            System.out.println("Failed to get city details");
-            return null;
-        }
+        String input = checkRegion();
 
         try
         {
@@ -874,22 +763,16 @@ public class App
         }
     }
 
+    /**
+     *
+     * @return
+     */
     public ArrayList<Country> report26(){
         ArrayList<Country> countryList = new ArrayList<>();
         Scanner sc = new Scanner(System.in);
 
         System.out.println("Enter the Region you would like to search within");
-        String input = sc.nextLine();
-
-        while (true)
-        {
-            if(input.matches("[a-zA-Z]+"))
-                break;
-            else {
-                System.out.println("Please enter a valid region");
-                input = sc.nextLine();
-            }
-        }
+        String input = validateStringInput();
 
         //Checks whether the country code is within the database
         try
@@ -984,7 +867,7 @@ public class App
      * @return scan.nextInt()
      * Ensures that the input only contains numbers
      */
-    public int validateInputForInt()
+    public int validateIntInput()
     {
         Scanner scan = new Scanner(System.in);
 
@@ -1019,27 +902,11 @@ public class App
         return input;
     }
 
-    //Getting City details
-    public ArrayList<City> CityStatement(String Query, String QueryD){
+    /**
+     * Getting City details
+     */
+    public ArrayList<City> CityStatement(String QueryD){
         ArrayList<City> cityList = new ArrayList<>();
-
-        try {
-            Statement stmt = con.createStatement();
-            //String strSelect = Query;
-
-            ResultSet rset = stmt.executeQuery(Query);
-
-            while (!rset.next()) {
-                System.out.println("no data");
-            }
-
-        }
-        catch (Exception e)
-        {
-            System.out.println(e.getMessage());
-            System.out.println("Failed to get city details");
-            return null;
-        }
 
         try{
             Statement stmt = con.createStatement();
@@ -1068,7 +935,9 @@ public class App
         }
     }
 
-    //Getting Country details
+    /**
+     * Getting Country details
+     */
     public ArrayList<Country> CountryStatement(String Query, String QueryD){
         ArrayList<Country> CountryList = new ArrayList<>();
 
@@ -1126,6 +995,128 @@ public class App
         }
     }
 
+    public void reportSelect(int ReportNum)
+    {
+        switch (ReportNum)
+        {
+            case 22:
+                report22();
+        }
+
+        //if statement to get report
+        if(ReportNum == 10){
+
+            ArrayList<City> cities = report10();
+            //Display cities
+            displayCities(cities);
+        }
+
+        //This is report 10 just making use of New Method
+        if(ReportNum == 11){
+            Scanner sc20 = new Scanner(System.in);
+
+            System.out.println("Enter the city you would like to search within");
+            String input20 = sc20.nextLine();
+
+            String str =
+                    "SELECT CountryCode "
+                            + "FROM city "
+                            + "WHERE CountryCode = " + "'" + input20 + "'";
+            String str1 =
+                    "SELECT ID, Name, CountryCode, District, Population "
+                            + "FROM city "
+                            + "WHERE CountryCode = " + "'" + input20 + "'"
+                            + "ORDER BY Population DESC";
+
+            ArrayList<City> cities = CityStatement(str1);
+            displayCities(cities);
+        }
+
+        //Report 25
+        if(ReportNum == 25){
+            Scanner s = new Scanner(System.in);
+
+            System.out.println("Enter the Continent you would like to search within");
+            String input = s.nextLine();
+
+            String str =
+                    "SELECT Population "
+                            + "FROM country "
+                            + "WHERE Continent = " + "'" + input + "'";
+
+            String str1 =
+                    "SELECT Code, Name, Continent, Region, SurfaceArea, IndepYear, Population, LifeExpectancy, GNP, GNPOld, LocalName, GovernmentForm, HeadOfState, Capital, Code2 "
+                            + "FROM country "
+                            + "WHERE Continent = " + "'" + input + "'"
+                            + "ORDER BY Population DESC";
+
+            ArrayList<Country> countries = CountryStatement(str, str1);
+            displayCountries(countries);
+        }
+
+        //Report 26
+        if(ReportNum == 26){
+            Scanner s = new Scanner(System.in);
+
+            System.out.println("Enter the Region you would like to search within");
+            String input = s.nextLine();
+
+            String str =
+                    "SELECT Population "
+                            + "FROM country "
+                            + "WHERE Region = " + "'" + input + "'";
+
+            String str1 =
+                    "SELECT Code, Name, Continent, Region, SurfaceArea, IndepYear, Population, LifeExpectancy, GNP, GNPOld, LocalName, GovernmentForm, HeadOfState, Capital, Code2 "
+                            + "FROM country "
+                            + "WHERE Region = " + "'" + input + "'"
+                            + "ORDER BY Population DESC";
+
+            ArrayList<Country> countries = CountryStatement(str, str1);
+            displayCountries(countries);
+        }
+    }
+
+    public String checkRegion()
+    {
+        String input = validateStringInput();
+
+        //Checks whether the region is within the database
+        try
+        {
+            // Create an SQL statement
+            Statement stmt = con.createStatement();
+            // Create string for SQL statement
+            String strSelect =
+                    "SELECT Region "
+                            + "FROM country "
+                            + "WHERE Region = " + "'" + input + "'";
+            // Execute SQL statement
+            ResultSet rset = stmt.executeQuery(strSelect);
+
+            //If no records are returned then you'll be asked to enter another region and that will be validated
+            while(!rset.next())
+            {
+                System.out.println("Region does not exist. Try again");
+                input = validateStringInput();
+
+                // Create string for SQL statement
+                strSelect =
+                        "SELECT Region "
+                                + "FROM country "
+                                + "WHERE Region = " + "'" + input + "'";
+                // Execute SQL statement
+                rset = stmt.executeQuery(strSelect);
+            }
+        }
+        catch (Exception e)
+        {
+            System.out.println(e.getMessage());
+            System.out.println("Failed to get city details");
+            return null;
+        }
+        return input;
+    }
     public void displayCities(ArrayList<City> cities)
     {
         if(cities == null)
