@@ -328,17 +328,7 @@ public class App
         Scanner sc = new Scanner(System.in);
 
         System.out.println("Enter the country code you would like to search within");
-        String input = sc.nextLine();
-        //Ensures that there are only letters in the input
-        while (true)
-        {
-            if(input.matches("[a-zA-Z]+"))
-                break;
-            else {
-                System.out.println("Please enter a valid country code");
-                input = sc.nextLine();
-            }
-        }
+        String input = validateStringInput();
 
         //Checks whether the country code is within the database
         try
@@ -357,16 +347,7 @@ public class App
             while(!rset.next())
             {
                 System.out.println("Country code does not exist. Try again");
-                input = sc.next();
-                while (true)
-                {
-                    if(input.matches("[a-zA-Z]+"))
-                        break;
-                    else {
-                        System.out.println("Please enter a valid country code");
-                        input = sc.next();
-                    }
-                }
+                input = validateStringInput();
 
                 // Create string for SQL statement
                 strSelect =
@@ -430,7 +411,7 @@ public class App
         Scanner sc = new Scanner(System.in);
 
         System.out.println("Enter the district you would like to search within");
-        String input = sc.nextLine();
+        String input = validateStringInput();
 
         //Checks whether the country code is within the database
         try
@@ -449,7 +430,7 @@ public class App
             while(!rset.next())
             {
                 System.out.println("District does not exist. Try again");
-                input = sc.nextLine();
+                input = validateStringInput();
 
                 // Create string for SQL statement
                 strSelect =
