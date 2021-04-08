@@ -696,9 +696,11 @@ public class App
         ArrayList<City> cityList = new ArrayList<>();
 
         System.out.println("Enter the number of capital cities you would like to print");
+        //Validates the input
         int numInput = validateIntInput();
 
         System.out.println("Enter the region you would like to search within");
+        //Checks whether the region is within the database
         String input = checkRegion();
 
         // Create string for SQL statement
@@ -855,7 +857,8 @@ public class App
     }
 
     /**
-     * Getting City details
+     * @return cityList
+     * Executes the given query then adds the info to cityList
      */
     public ArrayList<City> CityStatement(String Query){
         ArrayList<City> cityList = new ArrayList<>();
@@ -865,7 +868,6 @@ public class App
             ResultSet rset = stmt.executeQuery(Query);
 
             // Return new CityList if valid.
-            // Check one is returned
             while (rset.next())
             {
                 City tempCity = new City();
@@ -946,6 +948,10 @@ public class App
         }
     }
 
+    /**
+     * @param ReportNum
+     * Selects which report to run
+     */
     public void reportSelect(int ReportNum)
     {
         ArrayList<City> cities;
@@ -1037,6 +1043,10 @@ public class App
 
     }
 
+    /**
+     * @return input
+     * Ensures that the given region exists with the database
+     */
     public String checkRegion()
     {
         String input = validateStringInput();
@@ -1077,6 +1087,11 @@ public class App
         }
         return input;
     }
+
+    /**
+     * @param cities
+     * Displays the output of the query
+     */
     public void displayCities(ArrayList<City> cities)
     {
         if(cities == null)
