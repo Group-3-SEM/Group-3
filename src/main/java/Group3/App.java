@@ -19,7 +19,7 @@ public class App
         {
             int ReportNum = a.validateIntInput();
 
-            if(ReportNum >0 && ReportNum <40) {
+            if(ReportNum >0 && ReportNum <63) {
                 a.reportSelect(ReportNum);
                 break;
             }else{
@@ -509,9 +509,151 @@ public class App
     }
 
     /**
-     *
-     * @return
+     * Produce report on population of all countries in a continent from Largest to smallest
+     * @return CountryStatement
      */
+    public ArrayList<Country> report25()
+    {
+        System.out.println("Enter the Continent you would like to search within");
+        //Checks whether the region is within the database
+        String input = checkContinent();
+
+        String strSelect =
+                "SELECT Code, Name, Continent, Region, SurfaceArea, IndepYear, Population, LifeExpectancy, GNP, GNPOld, LocalName, GovernmentForm, HeadOfState, Capital, Code2 "
+                         + "FROM country "
+                         + "WHERE Continent = " + "'" + input + "'"
+                         + "ORDER BY Population DESC";
+        return CountryStatement(strSelect);
+    }
+
+    /**
+     * produce a report on the population of all the countries in a region by Largest to smallest
+     * @return CountryStatement
+     */
+    public ArrayList<Country> report26()
+    {
+        System.out.println("Enter the Region you would like to search within");
+        //Checks whether the region is within the database
+        String input = checkRegion();
+
+        String strSelect =
+                "SELECT Code, Name, Continent, Region, SurfaceArea, IndepYear, Population, LifeExpectancy, GNP, GNPOld, LocalName, GovernmentForm, HeadOfState, Capital, Code2 "
+                        + "FROM country "
+                        + "WHERE Region = " + "'" + input + "'"
+                        + "ORDER BY Population DESC";
+        return CountryStatement(strSelect);
+    }
+
+    /**
+     * produce a report on the top (N) populated countries in a continent
+     * @return CountryStatement
+     */
+    public ArrayList<Country> report28()
+    {
+        System.out.println("Enter the number of countries you would like to print");
+        //Validates the input
+        int numInput = validateIntInput();
+
+        System.out.println("Enter the continent you would like to search within");
+        //Checks whether the region is within the database
+        String input = checkContinent();
+
+        String strSelect =
+                "SELECT Code, Name, Continent, Region, SurfaceArea, IndepYear, Population, LifeExpectancy, GNP, GNPOld, LocalName, GovernmentForm, HeadOfState, Capital, Code2 "
+                        + "FROM country "
+                        + "WHERE Continent = " + "'" + input + "'"
+                        + "ORDER BY Population DESC "
+                        + "LIMIT " + numInput;
+
+        return CountryStatement(strSelect);
+    }
+
+    /**
+     * produce a report on the top n populated cities in a district
+     * @return CityStatement
+     */
+    public ArrayList<City> report39()
+    {
+        System.out.println("Enter the number of cities you would like to print");
+        //Validates the input
+        int numInput = validateIntInput();
+
+        System.out.println("Enter the District you would like to search within");
+        //Checks whether the region is within the database
+        String input = checkDistrict();
+
+        // Create string for SQL statement
+        String strSelect =
+                "SELECT ID, Name, CountryCode, District, city.Population "
+                        + "FROM city "
+                        + "WHERE District = " + "'" + input + "'"
+                        + "ORDER BY Population DESC "
+                        + "LIMIT " + numInput;
+
+        return CityStatement(strSelect);
+    }
+
+    /**
+     * produce a report on the population of all the capital cities in a region from largest to smallest
+     * @return CityStatement
+     */
+    public ArrayList<City> report42()
+    {
+        System.out.println("Enter the Region you would like to search within");
+        //Checks whether the region is within the database
+        String input = checkRegion();
+
+        String strSelect =
+                "SELECT ID, city.Name, CountryCode, District, city.Population "
+                        + "FROM city "
+                        + "JOIN country ON city.ID = country.Capital "
+                        + "WHERE Region = " + "'" + input + "'"
+                        + "ORDER BY Population DESC ";
+
+        return CityStatement(strSelect);
+    }
+
+    /**
+     * produce a report showing all countries and their details
+     * @return CountryStatement
+     */
+    public ArrayList<Country> report60()
+    {
+        String strSelect =
+                "SELECT Code, Name, Continent, Region, SurfaceArea, IndepYear, Population, LifeExpectancy, GNP, GNPOld, LocalName, GovernmentForm, HeadOfState, Capital, Code2 "
+                        + "FROM country";
+
+        return CountryStatement(strSelect);
+    }
+
+    /**
+     * produce a report showing all cities and their details
+     * @return CityStatement
+     */
+    public ArrayList<City> report61()
+    {
+        String strSelect =
+                "SELECT ID, Name, CountryCode, District, Population "
+                        + "FROM city";
+        return  CityStatement(strSelect);
+    }
+
+    /**
+     * produce a report showing all capital cities and their details
+     * @return CityStatement
+     */
+    public ArrayList<City> report62()
+    {
+        String strSelect =
+                "SELECT ID, city.Name, CountryCode, District, city.Population "
+                        + "FROM city "
+                        + "JOIN country ON city.ID = country.Capital";
+
+        return CityStatement(strSelect);
+    }
+
+    
+    /*
     public ArrayList<Country> report26(){
         ArrayList<Country> countryList = new ArrayList<>();
         Scanner sc = new Scanner(System.in);
@@ -608,6 +750,8 @@ public class App
         }
     }
 
+     */
+
     /**
      * Ensures that the input only contains numbers
      * @return scan.nextInt()
@@ -682,7 +826,7 @@ public class App
     /**
      * Getting Country details
      */
-    public ArrayList<Country> CountryStatement(String Query, String QueryD){
+    public ArrayList<Country> CountryStatement(String Query){
         ArrayList<Country> CountryList = new ArrayList<>();
 
         try {
@@ -690,25 +834,6 @@ public class App
 
             ResultSet rset = stmt.executeQuery(Query);
 
-            while (!rset.next()) {
-                System.out.println("no data");
-            }
-
-        }
-        catch (Exception e)
-        {
-            System.out.println(e.getMessage());
-            System.out.println("Failed to get country details");
-            return null;
-        }
-
-        try{
-            Statement stmt = con.createStatement();
-
-            ResultSet rset = stmt.executeQuery(QueryD);
-
-            // Return new CityList if valid.
-            // Check one is returned
             while (rset.next())
             {
                 Country country = new Country();
@@ -746,6 +871,7 @@ public class App
     public void reportSelect(int ReportNum)
     {
         ArrayList<City> cities;
+        ArrayList<Country> countries;
 
         switch (ReportNum)
         {
@@ -791,6 +917,38 @@ public class App
                 break;
             case 22:
                 cities = report22();
+                displayCities(cities);
+                break;
+            case 25:
+                countries = report25();
+                displayCountries(countries);
+                break;
+            case 26:
+                countries = report26();
+                displayCountries(countries);
+                break;
+            case 28:
+                countries = report28();
+                displayCountries(countries);
+                break;
+            case 39:
+                cities = report39();
+                displayCities(cities);
+                break;
+            case 42:
+                cities = report42();
+                displayCities(cities);
+                break;
+            case 60:
+                countries = report60();
+                displayCountries(countries);
+                break;
+            case 61:
+                cities = report61();
+                displayCities(cities);
+                break;
+            case 62:
+                cities = report62();
                 displayCities(cities);
                 break;
         }
