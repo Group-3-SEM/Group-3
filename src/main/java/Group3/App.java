@@ -707,7 +707,7 @@ public class App
 
         return PopulationStatement(strSelect);
     }
-
+    /*
     public String[] report55(){
 
         String strSelect =
@@ -719,6 +719,7 @@ public class App
 
         return LanguageStatement(strSelect);
     }
+     */
 
 
 
@@ -894,7 +895,7 @@ public class App
             return null;
         }
     }
-
+    /*
     public String[] LanguageStatement(String Query){
         String[] LanguageArray;
         LanguageArray = new String[10];
@@ -920,6 +921,7 @@ public class App
             return null;
         }
     }
+     */
 
     public String DifferenceStatement(String Query1, String Query2){
         int CityIn = 0;
@@ -1069,11 +1071,6 @@ public class App
                 Population = report54();
                 displayPopulation(Population);
                 break;
-            case 55:
-                Language = report55();
-                displayLanguage(Language);
-                break;
-
             case 60:
                 countries = report60();
                 displayCountries(countries);
