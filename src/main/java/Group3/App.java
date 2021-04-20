@@ -613,6 +613,57 @@ public class App
         return CityStatement(strSelect);
     }
 
+    /**
+     * Report on a number of people living in cities and not living in cities in continents
+     */
+    public String report46()
+    {
+        System.out.println("Enter the continent you would like to search within");
+        //Checks whether the region is within the database
+        String input = checkContinent();
+
+        String str1 =
+                "SELECT Sum(city.Population) "
+                        + "FROM city "
+                        + "JOIN country ON city.CountryCode = country.Code "
+                        + "WHERE Continent = " + "'" + input + "'";
+
+
+        String str2 =
+                "SELECT Sum(Population) "
+                        + "FROM country "
+                        + "WHERE Continent = " + "'" + input + "'";
+
+        return DifferenceStatement(str1, str2);
+    }
+
+    /**
+     * Report on a number of people living in cities and not living in cities in Regions
+     */
+    public String report47()
+    {
+        System.out.println("Enter the Region you would like to search within");
+        //Checks whether the region is within the database
+        String input = checkRegion();
+
+        String str1 =
+                "SELECT Sum(city.Population) "
+                        + "FROM city "
+                        + "JOIN country ON city.CountryCode = country.Code "
+                        + "WHERE Region = " + "'" + input + "'";
+
+
+        String str2 =
+                "SELECT Sum(Population) "
+                        + "FROM country "
+                        + "WHERE Region = " + "'" + input + "'";
+
+        return DifferenceStatement(str1, str2);
+    }
+
+    /**
+     * Report on a number of people living in cities and not living in cities in Countries
+     */
     public String report48()
     {
         System.out.println("Enter the country code you would like to search within");
@@ -633,6 +684,9 @@ public class App
         return DifferenceStatement(str1, str2);
     }
 
+    /**
+     * Produce population of the world
+     */
     public String report49(){
         String strSelect =
                 "SELECT SUM(Population) "
@@ -641,6 +695,9 @@ public class App
         return PopulationStatement(strSelect);
     }
 
+    /**
+     * Produce Population of continent
+     */
     public String report50(){
         System.out.println("Enter the continent you would like to search within");
         //Checks whether the region is within the database
@@ -654,7 +711,9 @@ public class App
         return PopulationStatement(strSelect);
     }
 
-
+    /**
+     * Produce Population of regions
+     */
     public String report51(){
         System.out.println("Enter the Region you would like to search within");
         //Checks whether the region is within the database
@@ -668,6 +727,9 @@ public class App
         return PopulationStatement(strSelect);
     }
 
+    /**
+     * Produce Population of Countries
+     */
     public String report52(){
         System.out.println("Enter the Country Code you would like to search within");
         //Checks whether the region is within the database
@@ -681,7 +743,9 @@ public class App
         return PopulationStatement(strSelect);
     }
 
-
+    /**
+     * Produce Population on District
+     */
     public String report53(){
         System.out.println("Enter the District you would like to search within");
         //Checks whether the region is within the database
@@ -695,6 +759,9 @@ public class App
         return PopulationStatement(strSelect);
     }
 
+    /**
+     * Produce Population on City
+     */
     public String report54(){
         System.out.println("Enter the City you would like to search within");
         //Checks whether the region is within the database
@@ -874,6 +941,9 @@ public class App
         }
     }
 
+    /**
+     * Getting Population details
+     */
     public String PopulationStatement(String Query){
         String Population = "";
         int NextPop = 0;
@@ -923,15 +993,17 @@ public class App
     }
      */
 
+    /**
+     * Getting the Details of people living in city and not in city
+     */
     public String DifferenceStatement(String Query1, String Query2){
-        int CityIn = 0;
-        int Total = 0;
-        int CityOut = 0;
+        long CityIn = 0;
+        long Total = 0;
+        long CityOut = 0;
         String Difference = "";
         //DifferenceArray = new String[195];
 
-        //int j = 1;
-        int i = 0;
+
         try {
             Statement stmt = con.createStatement();
             Statement stmt2 = con.createStatement();
@@ -941,12 +1013,12 @@ public class App
 
             while (rset.next())
             {
-                CityIn = rset.getInt(1);
+                CityIn = rset.getLong(1);
             }
 
             while(rset2.next())
             {
-                Total = rset2.getInt(1);
+                Total = rset2.getLong(1);
             }
             CityOut = Total - CityIn;
             Difference = ("Population in Cities " + String.valueOf(CityIn) + " " + "Population not in Cities " + String.valueOf(CityOut));
@@ -1042,6 +1114,14 @@ public class App
             case 42:
                 cities = report42();
                 displayCities(cities);
+                break;
+            case 46:
+                Difference = report46();
+                displaypopDif(Difference);
+                break;
+            case 47:
+                Difference = report47();
+                displaypopDif(Difference);
                 break;
             case 48:
                 Difference = report48();
