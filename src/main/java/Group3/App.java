@@ -613,6 +613,26 @@ public class App
         return CityStatement(strSelect);
     }
 
+    public String report48()
+    {
+        System.out.println("Enter the country code you would like to search within");
+        //Checks whether the country code is within the database
+        String input = checkCountryCode();
+
+        String str1 =
+                "SELECT Sum(Population) "
+                        + "FROM city "
+                        + "WHERE CountryCode = " + "'" + input + "'";
+
+
+        String str2 =
+                "SELECT Population "
+                        + "FROM country "
+                        + "WHERE Code = " + "'" + input + "'";
+
+        return DifferenceStatement(str1, str2);
+    }
+
     public String report49(){
         String strSelect =
                 "SELECT SUM(Population) "
@@ -687,6 +707,20 @@ public class App
 
         return PopulationStatement(strSelect);
     }
+
+    public String[] report55(){
+
+        String strSelect =
+                "SELECT Language, SUM(country.Population) "
+                        + "FROM countrylanguage "
+                        + "JOIN country ON country.Code = countrylanguage.CountryCode "
+                        + "ORDER BY Population DESC "
+                        + "GROUP BY country";
+
+        return LanguageStatement(strSelect);
+    }
+
+
 
     /**
      * produce a report showing all countries and their details
@@ -861,6 +895,70 @@ public class App
         }
     }
 
+    public String[] LanguageStatement(String Query){
+        String[] LanguageArray;
+        LanguageArray = new String[10];
+        int j = 1;
+        int i = 0;
+        try {
+            Statement stmt = con.createStatement();
+
+            ResultSet rset = stmt.executeQuery(Query);
+
+            while (rset.next())
+            {
+                LanguageArray[i] = rset.getString(j);
+                i++;
+                j++;
+            }
+            return LanguageArray;
+        }
+        catch (Exception e)
+        {
+            System.out.println(e.getMessage());
+            System.out.println("Failed to get Langauge details");
+            return null;
+        }
+    }
+
+    public String DifferenceStatement(String Query1, String Query2){
+        int CityIn = 0;
+        int Total = 0;
+        int CityOut = 0;
+        String Difference = "";
+        //DifferenceArray = new String[195];
+
+        //int j = 1;
+        int i = 0;
+        try {
+            Statement stmt = con.createStatement();
+            Statement stmt2 = con.createStatement();
+
+            ResultSet rset = stmt.executeQuery(Query1);
+            ResultSet rset2 = stmt2.executeQuery(Query2);
+
+            while (rset.next())
+            {
+                CityIn = rset.getInt(1);
+            }
+
+            while(rset2.next())
+            {
+                Total = rset2.getInt(1);
+            }
+            CityOut = Total - CityIn;
+            Difference = ("Population in Cities " + String.valueOf(CityIn) + " " + "Population not in Cities " + String.valueOf(CityOut));
+
+            //Difference = (Total + " " + CityIn);
+            return Difference;
+        }
+        catch (Exception e) {
+            System.out.println(e.getMessage());
+            System.out.println("Failed to get Population Difference details");
+            return null;
+        }
+    }
+
     /**
      * Selects which report to run
      * @param ReportNum
@@ -869,6 +967,12 @@ public class App
     {
         ArrayList<City> cities;
         ArrayList<Country> countries;
+        String[] Language;
+        String Difference;
+        Language = new String[10];
+        String[] DifferencePop;
+        DifferencePop = new String[195];
+
         String Population;
 
         switch (ReportNum)
@@ -937,6 +1041,10 @@ public class App
                 cities = report42();
                 displayCities(cities);
                 break;
+            case 48:
+                Difference = report48();
+                displaypopDif(Difference);
+                break;
             case 49:
                 Population = report49();
                 displayPopulation(Population);
@@ -961,6 +1069,11 @@ public class App
                 Population = report54();
                 displayPopulation(Population);
                 break;
+            case 55:
+                Language = report55();
+                displayLanguage(Language);
+                break;
+
             case 60:
                 countries = report60();
                 displayCountries(countries);
@@ -1323,5 +1436,22 @@ public class App
             return;
         }
         System.out.println("Population: " + Population);
+    }
+
+    public void displayLanguage(String[] Language){
+        int i = 0;
+        int j = 0;
+        for(i = 0; i < 5; i++){
+            System.out.println("Langauge: " + Language[j] + " Population: " + Language[j+1]);
+            j = j + 2;
+        }
+    }
+
+    public void displaypopDif(String PopDif){
+        if(PopDif == null){
+            System.out.println("Error No data");
+            return;
+        }
+        System.out.println("Population: " + PopDif);
     }
 }
