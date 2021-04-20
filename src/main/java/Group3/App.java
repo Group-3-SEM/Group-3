@@ -1434,7 +1434,7 @@ public class App
         }
         System.out.println("Population: " + Population);
     }
-
+    /*
     public void displayLanguage(String[] Language){
         int i = 0;
         int j = 0;
@@ -1443,6 +1443,7 @@ public class App
             j = j + 2;
         }
     }
+     */
 
     public void displaypopDif(String PopDif){
         if(PopDif == null){
