@@ -774,6 +774,32 @@ public class App
 
         return PopulationStatement(strSelect);
     }
+
+    /**
+     * Produce a report on most spoken languages
+     */
+    public String report55(int i)
+    {
+        //System.out.println("Enter the Language you would like to search within");
+        //Checks whether the region is within the database
+        //String input = checkLanguage();
+
+        String[] input = {"Chinese", "Hindi", "Spanish", "English", "Arabic"};
+
+
+        String str =
+                "SELECT SUM(Population) "
+                        + "FROM country ";
+
+        String strSelect =
+                "SELECT SUM(Population) "
+                        + "FROM country "
+                        + "JOIN countrylanguage ON country.Code = countrylanguage.CountryCode "
+                        + "WHERE Language = " + "'" + input[i] + "'";
+
+        return LanguageStatement(input[i], strSelect, str);
+    }
+
     /*
     public String[] report55(){
 
@@ -965,24 +991,34 @@ public class App
             return null;
         }
     }
-    /*
-    public String[] LanguageStatement(String Query){
-        String[] LanguageArray;
-        LanguageArray = new String[10];
-        int j = 1;
-        int i = 0;
+
+    public String LanguageStatement(String input, String Query, String Query2){
+        float number = 0;
+        int outputNum = 0;
+        String Statement = "";
+        float Calculation;
+        float TotalPopulation = 0;
         try {
             Statement stmt = con.createStatement();
+            Statement stmt2 = con.createStatement();
 
             ResultSet rset = stmt.executeQuery(Query);
+            ResultSet rset2 = stmt2.executeQuery(Query2);
 
             while (rset.next())
             {
-                LanguageArray[i] = rset.getString(j);
-                i++;
-                j++;
+                number = rset.getFloat(1);
             }
-            return LanguageArray;
+            while (rset2.next())
+            {
+                TotalPopulation = rset2.getFloat(1);
+            }
+            Calculation = number / TotalPopulation;
+            Calculation = Calculation * 100;
+            outputNum = (int)number;
+
+            Statement = ("The number of people that speak " + input + " is " + outputNum + " And that is " + Calculation + " percentage of the world population");
+            return Statement;
         }
         catch (Exception e)
         {
@@ -991,7 +1027,7 @@ public class App
             return null;
         }
     }
-     */
+
 
     /**
      * Getting the Details of people living in city and not in city
@@ -1039,11 +1075,11 @@ public class App
      */
     public void reportSelect(int ReportNum)
     {
+        int i = 0;
         ArrayList<City> cities;
         ArrayList<Country> countries;
-        String[] Language;
+        String Language;
         String Difference;
-        Language = new String[10];
         String[] DifferencePop;
         DifferencePop = new String[195];
 
@@ -1151,6 +1187,13 @@ public class App
                 Population = report54();
                 displayPopulation(Population);
                 break;
+            case 55:
+                for(i = 0; i < 5; i++) {
+                    Language = report55(i);
+                    displayLanguage(Language);
+                }
+                break;
+
             case 60:
                 countries = report60();
                 displayCountries(countries);
@@ -1461,6 +1504,48 @@ public class App
         return input;
     }
 
+    public String checkLanguage()
+    {
+        String input = validateStringInput();
+
+        //Checks whether the Language is within the database
+        try
+        {
+            // Create an SQL statement
+            Statement stmt = con.createStatement();
+            // Create string for SQL statement
+            String strSelect =
+                    "SELECT Language "
+                            + "FROM countrylanguage "
+                            + "WHERE Language = " + "'" + input + "'";
+            // Execute SQL statement
+            ResultSet rset = stmt.executeQuery(strSelect);
+
+            //If no records are returned then you'll be asked to enter another Language and that will be validated
+            while(!rset.next())
+            {
+                System.out.println("language does not exist. Try again");
+                input = validateStringInput();
+
+                // Create string for SQL statement
+                strSelect =
+                        "SELECT Language "
+                                + "FROM countrylanguage "
+                                + "WHERE Language = " + "'" + input + "'";
+                // Execute SQL statement
+                rset = stmt.executeQuery(strSelect);
+            }
+        }
+        catch (Exception e)
+        {
+            System.out.println(e.getMessage());
+            System.out.println("Failed to get Language details");
+            return null;
+        }
+
+        return input;
+    }
+
     /**
      * Displays the output of the query
      * @param cities
@@ -1514,16 +1599,15 @@ public class App
         }
         System.out.println("Population: " + Population);
     }
-    /*
-    public void displayLanguage(String[] Language){
-        int i = 0;
-        int j = 0;
-        for(i = 0; i < 5; i++){
-            System.out.println("Langauge: " + Language[j] + " Population: " + Language[j+1]);
-            j = j + 2;
+
+    public void displayLanguage(String Language){
+        if(Language == null){
+            System.out.println("Error No data");
+            return;
         }
+        System.out.println(Language);
     }
-     */
+
 
     public void displaypopDif(String PopDif){
         if(PopDif == null){
