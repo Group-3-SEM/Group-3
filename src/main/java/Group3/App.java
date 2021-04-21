@@ -1503,7 +1503,7 @@ public class App
 
         return input;
     }
-
+    /*
     public String checkLanguage()
     {
         String input = validateStringInput();
@@ -1545,6 +1545,7 @@ public class App
 
         return input;
     }
+     */
 
     /**
      * Displays the output of the query
