@@ -1190,7 +1190,7 @@ public class App
             case 55:
                 for(i = 0; i < 5; i++) {
                     Language = report55(i);
-                    displayLanguage(Language);
+                    displayLanguageReport(Language);
                 }
                 break;
 
@@ -1601,7 +1601,7 @@ public class App
         System.out.println("Population: " + Population);
     }
 
-    public void displayLanguage(String Language){
+    public void displayLanguageReport(String Language){
         if(Language == null){
             System.out.println("Error No data");
             return;
