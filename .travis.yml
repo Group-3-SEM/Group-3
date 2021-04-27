@@ -55,4 +55,4 @@ stages:
   - unit tests
   - integration tests
   - name: deploy
-    if: branch = kev-reports
+    if: branch = master
