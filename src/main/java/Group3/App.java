@@ -14,19 +14,7 @@ public class App
         a.connect("localhost:33060");
 
         System.out.println("Enter the report you want to run");
-
-        while (true)
-        {
-            int ReportNum = a.validateIntInput();
-
-            if(ReportNum >0 && ReportNum <63) {
-                a.reportSelect(ReportNum);
-                break;
-            }else{
-                System.out.println("Please enter a valid Report Number");
-            }
-        }
-
+        a.reportSelect();
 
         // Disconnect from database
         a.disconnect();
@@ -67,7 +55,7 @@ public class App
             }
             catch (SQLException sqle)
             {
-                System.out.println("Failed to connect to database attempt " + Integer.toString(i));
+                System.out.println("Failed to connect to database attempt " + i);
                 System.out.println(sqle.getMessage());
             }
             catch (InterruptedException ie)
@@ -994,8 +982,8 @@ public class App
 
     public String LanguageStatement(String input, String Query, String Query2){
         float number = 0;
-        int outputNum = 0;
-        String Statement = "";
+        int outputNum;
+        String Statement;
         float Calculation;
         float TotalPopulation = 0;
         try {
@@ -1035,8 +1023,8 @@ public class App
     public String DifferenceStatement(String Query1, String Query2){
         long CityIn = 0;
         long Total = 0;
-        long CityOut = 0;
-        String Difference = "";
+        long CityOut;
+        String Difference;
         //DifferenceArray = new String[195];
 
 
@@ -1057,7 +1045,7 @@ public class App
                 Total = rset2.getLong(1);
             }
             CityOut = Total - CityIn;
-            Difference = ("Population in Cities " + String.valueOf(CityIn) + " " + "Population not in Cities " + String.valueOf(CityOut));
+            Difference = ("Population in Cities " + CityIn + " " + "Population not in Cities " + CityOut);
 
             //Difference = (Total + " " + CityIn);
             return Difference;
@@ -1071,11 +1059,11 @@ public class App
 
     /**
      * Selects which report to run
-     * @param ReportNum
      */
-    public void reportSelect(int ReportNum)
+    public void reportSelect()
     {
-        int i = 0;
+        int ReportNum;
+        int i;
         ArrayList<City> cities;
         ArrayList<Country> countries;
         String Language;
@@ -1084,6 +1072,17 @@ public class App
         DifferencePop = new String[195];
 
         String Population;
+
+        while (true)
+        {
+            ReportNum = validateIntInput();
+
+            if(ReportNum >0 && ReportNum <63) {
+                break;
+            }else{
+                System.out.println("Please enter a valid Report Number");
+            }
+        }
 
         switch (ReportNum)
         {
@@ -1207,82 +1206,6 @@ public class App
                 displayCities(cities);
                 break;
         }
-
-        /**
-         * if statement to get report
-         *         if(ReportNum == 10){
-         *
-         *             ArrayList<City> cities = report10();
-         *             //Display cities
-         *             displayCities(cities);
-         *         }
-         *
-         *         //This is report 10 just making use of New Method
-         *         if(ReportNum == 11){
-         *             Scanner sc20 = new Scanner(System.in);
-         *
-         *             System.out.println("Enter the city you would like to search within");
-         *             String input20 = sc20.nextLine();
-         *
-         *             String str =
-         *                     "SELECT CountryCode "
-         *                             + "FROM city "
-         *                             + "WHERE CountryCode = " + "'" + input20 + "'";
-         *             String str1 =
-         *                     "SELECT ID, Name, CountryCode, District, Population "
-         *                             + "FROM city "
-         *                             + "WHERE CountryCode = " + "'" + input20 + "'"
-         *                             + "ORDER BY Population DESC";
-         *
-         *             ArrayList<City> cities = CityStatement(str1);
-         *             displayCities(cities);
-         *         }
-         *
-         *         //Report 25
-         *         if(ReportNum == 25){
-         *             Scanner s = new Scanner(System.in);
-         *
-         *             System.out.println("Enter the Continent you would like to search within");
-         *             String input = s.nextLine();
-         *
-         *             String str =
-         *                     "SELECT Population "
-         *                             + "FROM country "
-         *                             + "WHERE Continent = " + "'" + input + "'";
-         *
-         *             String str1 =
-         *                     "SELECT Code, Name, Continent, Region, SurfaceArea, IndepYear, Population, LifeExpectancy, GNP, GNPOld, LocalName, GovernmentForm, HeadOfState, Capital, Code2 "
-         *                             + "FROM country "
-         *                             + "WHERE Continent = " + "'" + input + "'"
-         *                             + "ORDER BY Population DESC";
-         *
-         *             ArrayList<Country> countries = CountryStatement(str, str1);
-         *             displayCountries(countries);
-         *         }
-         *
-         *         //Report 26
-         *         if(ReportNum == 26){
-         *             Scanner s = new Scanner(System.in);
-         *
-         *             System.out.println("Enter the Region you would like to search within");
-         *             String input = s.nextLine();
-         *
-         *             String str =
-         *                     "SELECT Population "
-         *                             + "FROM country "
-         *                             + "WHERE Region = " + "'" + input + "'";
-         *
-         *             String str1 =
-         *                     "SELECT Code, Name, Continent, Region, SurfaceArea, IndepYear, Population, LifeExpectancy, GNP, GNPOld, LocalName, GovernmentForm, HeadOfState, Capital, Code2 "
-         *                             + "FROM country "
-         *                             + "WHERE Region = " + "'" + input + "'"
-         *                             + "ORDER BY Population DESC";
-         *
-         *             ArrayList<Country> countries = CountryStatement(str, str1);
-         *             displayCountries(countries);
-         *         }
-         */
-
     }
 
     /**
@@ -1377,7 +1300,7 @@ public class App
 
     /**
      * Ensures that the given district exists within the database
-     * @return
+     * @return input
      */
     public String checkDistrict()
     {
@@ -1420,6 +1343,10 @@ public class App
         return input;
     }
 
+    /**
+     * Ensures that the given continent exists within the database
+     * @return input
+     */
     public String checkContinent()
     {
         String input = validateStringInput();
@@ -1462,6 +1389,10 @@ public class App
         return input;
     }
 
+    /**
+     * Ensures that the given city exists within the database
+     * @return input
+     */
     public String checkCity()
     {
         String input = validateStringInput();

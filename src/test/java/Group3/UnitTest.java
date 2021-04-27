@@ -48,4 +48,10 @@ public class UnitTest
     {
         app.displayCountry(null);
     }
+
+    @Test
+    void cityStatementTestNull()
+    {
+        app.CityStatement(null);
+    }
 }
