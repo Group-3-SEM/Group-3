@@ -46,7 +46,7 @@ jobs:
       deploy:
         provider: releases
         # This is the token we set before
-        api_key: $GITHUB_OAUTH_TOKEN
+        api_key: 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
         # Copy built JAR file to release.  JAR built in $TRAVIS_BUILD_DIR/target
         file: $TRAVIS_BUILD_DIR/target/Group3.jar
         skip_cleanup: true
