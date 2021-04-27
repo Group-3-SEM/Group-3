@@ -35,7 +35,7 @@ jobs:
         - mvn package -DskipTests=true -Dmaven.javadoc.skip=true
       before_deploy:
         # Set up git user name and tag this commit
-        - git config --local user.name "Kevin Kimuyu"
+        - git config --local user.name "KevinKimuyu"
         - git config --local user.email "kevinkimuyu@gmail.com"
         # Create temporary tag from date and Git log.
         - export TRAVIS_TAG=${TRAVIS_TAG:-$(date +'%Y-%m-%d')-$(git log --format=%h -1)}
