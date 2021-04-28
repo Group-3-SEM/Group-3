@@ -788,6 +788,18 @@ public class App
     }
 
     /**
+     * Produce population of world
+     */
+
+    public String report26(){
+        String strSelect =
+                "SELECT SUM(Population) "
+                        + "FROM country ";
+
+        return PopulationStatement(strSelect);
+    }
+
+    /**
      * Produce Population of continent
      */
     public String report27(){
@@ -1221,6 +1233,10 @@ public class App
             case 25:
                 Difference = report25();
                 displaypopDif(Difference);
+                break;
+            case 26:
+                Population = report26();
+                displayPopulation(Population);
                 break;
             case 27:
                 Population = report27();

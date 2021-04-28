@@ -36,37 +36,37 @@ public class UnitTest {
     }
 
     @Test
-    void TestReport7(){
-        app.report7();
+    void TestReport1(){
+        app.report1();
     }
 
     @Test
-    void TestReport10(){
+    void TestReport2(){
         InputStream sysInBackup = System.in;
         ByteArrayInputStream in = new ByteArrayInputStream("AUS".getBytes());
         System.setIn(in);
-        assertNotNull(app.report10());
+        assertNotNull(app.report2());
         System.setIn(sysInBackup);
     }
 
     @Test
-    void TestReport11(){
+    void TestReport3(){
         InputStream sysInBackup = System.in;
         ByteArrayInputStream in = new ByteArrayInputStream("Kabol".getBytes());
         System.setIn(in);
-        assertNotNull(app.report11());
+        assertNotNull(app.report3());
         System.setIn(sysInBackup);
     }
 
     @Test
-    void TestReport12(){
+    void TestReport4(){
 
         InputStream sysInBackup = System.in;
         ByteArrayInputStream in = new ByteArrayInputStream("3".getBytes());
         System.setIn(in);
 
 
-        assertNotNull(app.report12());
+        assertNotNull(app.report4());
         System.setIn(sysInBackup);
     }
     /*
@@ -96,10 +96,46 @@ public class UnitTest {
 
 
     @Test
-    void TestReport17(){
-        assertNotNull(app.report17());
+    void TestReport7(){
+        assertNotNull(app.report7());
     }
 
+    @Test
+    void TestReport8(){
+        InputStream sysInBackup = System.in;
+        ByteArrayInputStream in = new ByteArrayInputStream("Asia".getBytes());
+        System.setIn(in);
+        assertNotNull(app.report8());
+        System.setIn(sysInBackup);
+    }
+
+    @Test
+    void TestReport9(){
+        InputStream sysInBackup = System.in;
+        ByteArrayInputStream in = new ByteArrayInputStream("Middle East".getBytes());
+        System.setIn(in);
+        assertNotNull(app.report9());
+        System.setIn(sysInBackup);
+    }
+
+    @Test
+    void TestReport10(){
+        InputStream sysInBackup = System.in;
+        ByteArrayInputStream in = new ByteArrayInputStream("AUS".getBytes());
+        System.setIn(in);
+        assertNotNull(app.report10());
+        System.setIn(sysInBackup);
+    }
+
+    @Test
+    void TestReport11(){
+        InputStream sysInBackup = System.in;
+        ByteArrayInputStream in = new ByteArrayInputStream("kabol".getBytes());
+        System.setIn(in);
+        assertNotNull(app.report11());
+        System.setIn(sysInBackup);
+    }
+    /*
     @Test
     void TestReport20(){
         InputStream sysInBackup = System.in;
@@ -109,122 +145,99 @@ public class UnitTest {
         System.setIn(sysInBackup);
     }
 
-    @Test
-    void TestReport25(){
-        InputStream sysInBackup = System.in;
-        ByteArrayInputStream in = new ByteArrayInputStream("As".getBytes());
-        System.setIn(in);
-        assertNotNull(app.report25());
-        System.setIn(sysInBackup);
-    }
+     */
 
     @Test
-    void TestReport26(){
-        InputStream sysInBackup = System.in;
-        ByteArrayInputStream in = new ByteArrayInputStream("Middle East".getBytes());
-        System.setIn(in);
-        assertNotNull(app.report26());
-        System.setIn(sysInBackup);
-    }
-
-    @Test
-    void TestReport42(){
-        InputStream sysInBackup = System.in;
-        ByteArrayInputStream in = new ByteArrayInputStream("Middle East".getBytes());
-        System.setIn(in);
-        assertNotNull(app.report42());
-        System.setIn(sysInBackup);
-    }
-
-    @Test
-    void TestReport46(){
+    void TestReport23(){
         InputStream sysInBackup = System.in;
         ByteArrayInputStream in = new ByteArrayInputStream("Europe".getBytes());
         System.setIn(in);
 
-        assertEquals("Population in Cities 241942813 Population not in Cities 488131787", app.report46());
+        assertEquals("Population in Cities 241942813 Population not in Cities 488131787", app.report23());
     }
 
     @Test
-    void TestReport47(){
+    void TestReport24(){
         InputStream sysInBackup = System.in;
         ByteArrayInputStream in = new ByteArrayInputStream("Middle East".getBytes());
         System.setIn(in);
 
-        assertEquals("Population in Cities 70371374 Population not in Cities 118009326", app.report47());
+        assertEquals("Population in Cities 70371374 Population not in Cities 118009326", app.report24());
     }
 
     @Test
-    void TestReport48() {
+    void TestReport25() {
         InputStream sysInBackup = System.in;
         ByteArrayInputStream in = new ByteArrayInputStream("AUS".getBytes());
         System.setIn(in);
 
-        assertEquals("Population in Cities 11313666 Population not in Cities 7572334", app.report48());
+        assertEquals("Population in Cities 11313666 Population not in Cities 7572334", app.report25());
     }
 
     @Test
-    void TestReport49() {
-        assertEquals("6078749450", app.report49());
+    void TestReport26() {
+        assertEquals("6078749450", app.report26());
     }
 
+
+
     @Test
-    void TestReport50() {
+    void TestReport27() {
         InputStream sysInBackup = System.in;
         ByteArrayInputStream in = new ByteArrayInputStream("Europe".getBytes());
         System.setIn(in);
 
-        assertEquals("730074600", app.report50());
+        assertEquals("730074600", app.report27());
 
         System.setIn(sysInBackup);
     }
 
     @Test
-    void TestReport51(){
+    void TestReport28(){
         InputStream sysInBackup = System.in;
         ByteArrayInputStream in = new ByteArrayInputStream("Middle East".getBytes());
         System.setIn(in);
 
-        assertEquals("188380700", app.report51());
+        assertEquals("188380700", app.report28());
 
         System.setIn(sysInBackup);
     }
 
     @Test
-    void TestReport52(){
+    void TestReport29(){
         InputStream sysInBackup = System.in;
         ByteArrayInputStream in = new ByteArrayInputStream("AUS".getBytes());
         System.setIn(in);
 
-        assertEquals("18886000", app.report52());
+        assertEquals("18886000", app.report29());
 
         System.setIn(sysInBackup);
     }
 
     @Test
-    void TestReport53(){
+    void TestReport30(){
         InputStream sysInBackup = System.in;
         ByteArrayInputStream in = new ByteArrayInputStream("Kabol".getBytes());
         System.setIn(in);
 
-        assertEquals("1780000", app.report53());
+        assertEquals("1780000", app.report30());
 
         System.setIn(sysInBackup);
     }
 
     @Test
-    void TestReport54(){
+    void TestReport31(){
         InputStream sysInBackup = System.in;
         ByteArrayInputStream in = new ByteArrayInputStream("Amsterdam".getBytes());
         System.setIn(in);
 
-        assertEquals("731200", app.report54());
+        assertEquals("731200", app.report31());
 
         System.setIn(sysInBackup);
     }
 
     @Test
-    void TestReport55(){
+    void TestReport32(){
         int i = 0;
         String str1 = "The number of people that speak Chinese is 1968265472 And that is 32.379444 percentage of the world population";
         String str2 = "The number of people that speak Hindi is 1046302976 And that is 17.21247 percentage of the world population";
@@ -232,17 +245,18 @@ public class UnitTest {
         String str4 = "The number of people that speak English is 627418304 And that is 10.321503 percentage of the world population";
         String str5 = "The number of people that speak Arabic is 552045120 And that is 9.081557 percentage of the world population";
 
-        assertEquals(str1, app.report55(i));
+        assertEquals(str1, app.report32(i));
         i++;
-        assertEquals(str2, app.report55(i));
+        assertEquals(str2, app.report32(i));
         i++;
-        assertEquals(str3, app.report55(i));
+        assertEquals(str3, app.report32(i));
         i++;
-        assertEquals(str4, app.report55(i));
+        assertEquals(str4, app.report32(i));
         i++;
-        assertEquals(str5, app.report55(i));
+        assertEquals(str5, app.report32(i));
     }
 
+    /*
     @Test
     void TestReport60(){
         assertNotNull(app.report60());
@@ -257,6 +271,8 @@ public class UnitTest {
     void TestReport62(){
         assertNotNull(app.report62());
     }
+
+     */
 
     @Test
     void TestValidateIntegerInput(){
