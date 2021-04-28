@@ -54,4 +54,34 @@ public class UnitTest
     {
         app.CityStatement(null);
     }
+
+    @Test
+    void cityStatementTestEmpty()
+    {
+        app.CityStatement("");
+    }
+
+    @Test
+    void countryStatementTestNull()
+    {
+        app.CountryStatement(null);
+    }
+
+    @Test
+    void countryStatementTestEmpty()
+    {
+        app.CountryStatement("");
+    }
+
+    @Test
+    void populationStatementTestNull()
+    {
+        app.PopulationStatement(null);
+    }
+
+    @Test
+    void populationStatementTestEmpty()
+    {
+        app.PopulationStatement("");
+    }
 }
