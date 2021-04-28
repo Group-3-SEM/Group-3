@@ -480,11 +480,9 @@ public class UnitTest {
     void DisplayPopulationDifferenceNull(){
         app.displaypopDif(null);
     }
-    /*
+
     @AfterAll
     static void Close() {
         app.disconnect();
     }
-
-     */
 }
