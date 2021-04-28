@@ -1,7 +1,5 @@
 language: java
 
-sudo: false
-
 addons:
   hosts:
     - db
