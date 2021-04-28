@@ -69,7 +69,7 @@ public class UnitTest {
         assertNotNull(app.report12());
         System.setIn(sysInBackup);
     }
-
+    /*
     @Test
     void TestReport13(){
         String simulatedUserInput = "3";
@@ -85,6 +85,8 @@ public class UnitTest {
         assertNotNull(app.report13());
         System.setIn(sysInBackup);
     }
+
+     */
 
 
 
