@@ -367,7 +367,7 @@ public class UnitTest {
         ByteArrayInputStream in = new ByteArrayInputStream("AUS".getBytes());
         System.setIn(in);
 
-        assertEquals("AUS", app.checkCountryCode());
+        assertEquals("AUS", app.checkCountry());
     }
 
     @Test
@@ -399,7 +399,6 @@ public class UnitTest {
 
     @Test
     void DisplayCity() {
-        ArrayList<City> cities = new ArrayList<City>();
         City c = new City();
         c.ID = 1;
         c.Name = "Kabu";

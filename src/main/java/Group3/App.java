@@ -1316,7 +1316,7 @@ public class App
     }
 
     /**
-     * Ensures that the given country code exists within the database
+     * Ensures that the given country exists within the database
      * @return input
      */
     public String checkCountry()
