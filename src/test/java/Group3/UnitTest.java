@@ -16,7 +16,6 @@ public class UnitTest
     static void init()
     {
         app = new App();
-        app.connect("localhost:33060");
     }
 
     @Test
