@@ -270,12 +270,14 @@ public class App
 
     /**
      * All the countries in the world organised by largest population to smallest.
+     * @return CountryStatement
      */
-    public String report1(){
+    public ArrayList<Country> report1(){
         String strSelect =
-                "SELECT SUM(Population) "
-                        + "FROM country ";
-        return PopulationStatement(strSelect);
+                "SELECT Code, Name, Continent, Region, Population, Capital "
+                        + "FROM country "
+                        + "ORDER BY Population DESC";
+        return CountryStatement(strSelect);
     }
 
     /**
@@ -422,7 +424,7 @@ public class App
     {
 
         System.out.println("Enter the region you would like to search within");
-        String input = checkContinent();
+        String input = checkRegion();
 
         // Create string for SQL statement
         String strSelect =
@@ -440,14 +442,15 @@ public class App
      */
     public ArrayList<City> report10(){
 
-        System.out.println("Enter the country code you would like to search within");
-        String input = checkCountryCode();
+        System.out.println("Enter the country you would like to search within");
+        String input = checkCountry();
 
         // Create string for SQL statement
         String strSelect =
-                "SELECT Name, CountryCode, District, Population "
+                "SELECT city.Name, CountryCode, city.District, city.Population "
                         + "FROM city "
-                        + "WHERE CountryCode = " + "'" + input + "'"
+                        + "JOIN country ON city.CountryCode = country.Code "
+                        + "WHERE country.Name = " + "'" + input + "'"
                         + "ORDER BY Population DESC";
         // Execute SQL statement
         return CityStatement(strSelect);
@@ -546,16 +549,16 @@ public class App
         //Validates the input
         int numInput = validateIntInput();
 
-        System.out.println("Enter the country code you would like to search within");
-        //Checks whether the country code is within the database
-        String input = checkCountryCode();
+        System.out.println("Enter the country you would like to search within");
+        //Checks whether the country is within the database
+        String input = checkCountry();
 
         // Create string for SQL statement
         String strSelect =
                 "SELECT city.Name, CountryCode, District, city.Population "
                         + "FROM city "
                         + "JOIN country ON city.ID = country.Capital "
-                        + "WHERE CountryCode = " + "'" + input + "'"
+                        + "WHERE Name = " + "'" + input + "'"
                         + "ORDER BY Population DESC "
                         + "LIMIT " + numInput;
         // Execute SQL statement
@@ -768,20 +771,20 @@ public class App
      */
     public String report25()
     {
-        System.out.println("Enter the country code you would like to search within");
-        //Checks whether the country code is within the database
-        String input = checkCountryCode();
+        System.out.println("Enter the country you would like to search within");
+        //Checks whether the country is within the database
+        String input = checkCountry();
 
         String str1 =
                 "SELECT Sum(Population) "
                         + "FROM city "
-                        + "WHERE CountryCode = " + "'" + input + "'";
+                        + "WHERE Name = " + "'" + input + "'";
 
 
         String str2 =
                 "SELECT Population "
                         + "FROM country "
-                        + "WHERE Code = " + "'" + input + "'";
+                        + "WHERE Name = " + "'" + input + "'";
 
         return DifferenceStatement(str1, str2);
     }
@@ -822,14 +825,14 @@ public class App
      * Produce Population of Countries
      */
     public String report29(){
-        System.out.println("Enter the Country Code you would like to search within");
-        //Checks whether the region is within the database
-        String input = checkCountryCode();
+        System.out.println("Enter the country you would like to search within");
+        //Checks whether the country is within the database
+        String input = checkCountry();
 
         String strSelect =
                 "SELECT SUM(Population) "
                         + "FROM country "
-                        + "WHERE Code = " + "'" + input + "'";
+                        + "WHERE Name = " + "'" + input + "'";
 
         return PopulationStatement(strSelect);
     }
@@ -1121,8 +1124,8 @@ public class App
         switch (ReportNum)
         {
             case 1:
-                Population = report1();
-                displayPopulation(Population);
+                countries = report1();
+                displayCountries(countries);
                 break;
             case 2:
                 countries = report2();
@@ -1298,7 +1301,7 @@ public class App
      * Ensures that the given country code exists within the database
      * @return input
      */
-    public String checkCountryCode()
+    public String checkCountry()
     {
         String input = validateStringInput();
 
@@ -1309,23 +1312,23 @@ public class App
             Statement stmt = con.createStatement();
             // Create string for SQL statement
             String strSelect =
-                    "SELECT CountryCode "
-                            + "FROM city "
-                            + "WHERE CountryCode = " + "'" + input + "'";
+                    "SELECT Name "
+                            + "FROM country "
+                            + "WHERE Name = " + "'" + input + "'";
             // Execute SQL statement
             ResultSet rset = stmt.executeQuery(strSelect);
 
             //If no records are returned then you'll be asked to enter another country code and that will be validated
             while(!rset.next())
             {
-                System.out.println("Country code does not exist. Try again");
+                System.out.println("Country does not exist. Try again");
                 input = validateStringInput();
 
                 // Create string for SQL statement
                 strSelect =
-                        "SELECT CountryCode "
-                                + "FROM city "
-                                + "WHERE CountryCode = " + "'" + input + "'";
+                        "SELECT Name "
+                                + "FROM country "
+                                + "WHERE Name = " + "'" + input + "'";
                 // Execute SQL statement
                 rset = stmt.executeQuery(strSelect);
             }
@@ -1333,7 +1336,7 @@ public class App
         catch (Exception e)
         {
             System.out.println(e.getMessage());
-            System.out.println("Failed to get city details1");
+            System.out.println("Failed to get details");
             return null;
         }
         return input;
