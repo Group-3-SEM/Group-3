@@ -20,7 +20,7 @@ import static org.junit.jupiter.api.Assertions.*;
 public class UnitTest {
     static App app;
 
-    /*
+
 
     @BeforeAll
     static void init() {
@@ -479,9 +479,6 @@ public class UnitTest {
         app.displaypopDif(null);
     }
 
-
-
-     */
     @AfterAll
     static void Close() {
         app.disconnect();
