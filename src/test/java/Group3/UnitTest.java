@@ -20,11 +20,15 @@ import static org.junit.jupiter.api.Assertions.*;
 public class UnitTest {
     static App app;
 
+    /*
+
     @BeforeAll
     static void init() {
         app = new App();
         app.connect("localhost:33060");
     }
+
+
 
     @Test
     void displayCitiesTestNull() {
@@ -65,7 +69,7 @@ public class UnitTest {
         assertNotNull(app.report12());
         System.setIn(sysInBackup);
     }
-    /*
+
     @Test
     void TestReport13(){
         String simulatedUserInput = "3";
@@ -82,7 +86,7 @@ public class UnitTest {
         System.setIn(sysInBackup);
     }
 
-     */
+
 
 
 
@@ -475,6 +479,9 @@ public class UnitTest {
         app.displaypopDif(null);
     }
 
+
+
+     */
     @AfterAll
     static void Close() {
         app.disconnect();
