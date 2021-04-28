@@ -495,6 +495,7 @@ public class App
     /**
      * The top N populated cities in a continent where N is provided by the user.
      */
+
     public ArrayList<City> report13(){
 
         System.out.println("Enter the number of cities you would like to print");
@@ -790,6 +791,18 @@ public class App
     }
 
     /**
+     * Produce population of world
+     */
+
+    public String report26(){
+        String strSelect =
+                "SELECT SUM(Population) "
+                        + "FROM country ";
+
+        return PopulationStatement(strSelect);
+    }
+
+    /**
      * Produce Population of continent
      */
     public String report27(){
@@ -997,6 +1010,7 @@ public class App
      */
     public String PopulationStatement(String Query){
         String Population = "";
+        String Test = "test";
         int NextPop = 0;
         try {
             Statement stmt = con.createStatement();
@@ -1013,7 +1027,7 @@ public class App
         {
             System.out.println(e.getMessage());
             System.out.println("Failed to get population details");
-            return null;
+            return Test;
         }
     }
 
@@ -1222,6 +1236,10 @@ public class App
             case 25:
                 Difference = report25();
                 displaypopDif(Difference);
+                break;
+            case 26:
+                Population = report26();
+                displayPopulation(Population);
                 break;
             case 27:
                 Population = report27();
