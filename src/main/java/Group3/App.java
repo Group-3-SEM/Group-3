@@ -941,7 +941,6 @@ public class App
             while (rset.next())
             {
                 City tempCity = new City();
-                tempCity.ID = rset.getInt("ID");
                 tempCity.Name = rset.getString("Name");
                 tempCity.CountryCode = rset.getString("CountryCode");
                 tempCity.District = rset.getString("District");
