@@ -168,7 +168,7 @@ public class UnitTest {
     @Test
     void TestReport25() {
         InputStream sysInBackup = System.in;
-        ByteArrayInputStream in = new ByteArrayInputStream("AUS".getBytes());
+        ByteArrayInputStream in = new ByteArrayInputStream("Australia".getBytes());
         System.setIn(in);
 
         assertEquals("Population in Cities 11313666 Population not in Cities 7572334", app.report25());
@@ -206,7 +206,7 @@ public class UnitTest {
     @Test
     void TestReport29(){
         InputStream sysInBackup = System.in;
-        ByteArrayInputStream in = new ByteArrayInputStream("AUS".getBytes());
+        ByteArrayInputStream in = new ByteArrayInputStream("Australia".getBytes());
         System.setIn(in);
 
         assertEquals("18886000", app.report29());
@@ -362,12 +362,12 @@ public class UnitTest {
     }
 
     @Test
-    void TestCheckCountryCode(){
+    void TestCheckCountry(){
         InputStream sysInBackup = System.in;
-        ByteArrayInputStream in = new ByteArrayInputStream("AUS".getBytes());
+        ByteArrayInputStream in = new ByteArrayInputStream("Australia".getBytes());
         System.setIn(in);
 
-        assertEquals("AUS", app.checkCountry());
+        assertEquals("Australia", app.checkCountry());
     }
 
     @Test

@@ -777,9 +777,10 @@ public class App
         String input = checkCountry();
 
         String str1 =
-                "SELECT Sum(Population) "
+                "SELECT Sum(city.Population) "
                         + "FROM city "
-                        + "WHERE Name = " + "'" + input + "'";
+                        + "JOIN country ON city.CountryCode = country.Code "
+                        + "WHERE country.Name = " + "'" + input + "'";
 
 
         String str2 =
