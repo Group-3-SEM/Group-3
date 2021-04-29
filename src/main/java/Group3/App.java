@@ -558,8 +558,8 @@ public class App
         String strSelect =
                 "SELECT city.Name, CountryCode, District, city.Population "
                         + "FROM city "
-                        + "JOIN country ON city.ID = country.Capital "
-                        + "WHERE Name = " + "'" + input + "'"
+                        + "JOIN country ON city.CountryCode = country.Code "
+                        + "WHERE country.Name = " + "'" + input + "'"
                         + "ORDER BY Population DESC "
                         + "LIMIT " + numInput;
         // Execute SQL statement
@@ -599,7 +599,7 @@ public class App
 
         // Create string for SQL statement
         String strSelect =
-                "SELECT city.Name, CountryCode, city.Population "
+                "SELECT city.Name, CountryCode, District, city.Population "
                         + "FROM city "
                         + "JOIN country ON city.ID = country.Capital "
                         + "ORDER BY Population DESC";
@@ -618,7 +618,7 @@ public class App
         String input = checkContinent();
 
         String strSelect =
-                "SELECT city.Name, CountryCode, city.Population "
+                "SELECT city.Name, CountryCode, District, city.Population "
                         + "FROM city "
                         + "JOIN country ON city.ID = country.Capital "
                         + "WHERE Continent = " + "'" + input + "'"
@@ -638,7 +638,7 @@ public class App
         String input = checkRegion();
 
         String strSelect =
-                "SELECT city.Name, CountryCode, city.Population "
+                "SELECT city.Name, CountryCode, District, city.Population "
                         + "FROM city "
                         + "JOIN country ON city.ID = country.Capital "
                         + "WHERE Region = " + "'" + input + "'"
@@ -658,7 +658,7 @@ public class App
 
         // Create string for SQL statement
         String strSelect =
-                "SELECT city.Name, CountryCode, city.Population "
+                "SELECT city.Name, CountryCode, District, city.Population "
                         + "FROM city "
                         + "JOIN country ON city.ID = country.Capital "
                         + "ORDER BY Population DESC "
@@ -683,7 +683,7 @@ public class App
 
         // Create string for SQL statement
         String strSelect =
-                "SELECT city.Name, CountryCode, city.Population "
+                "SELECT city.Name, CountryCode, District, city.Population "
                         + "FROM city "
                         + "JOIN country ON city.ID = country.Capital "
                         + "WHERE Continent = " + "'" + input + "'"
@@ -709,7 +709,7 @@ public class App
 
         // Create string for SQL statement
         String strSelect =
-                "SELECT city.Name, CountryCode, city.Population "
+                "SELECT city.Name, CountryCode, District, city.Population "
                         + "FROM city "
                         + "JOIN country ON city.ID = country.Capital "
                         + "WHERE Region = " + "'" + input + "'"
