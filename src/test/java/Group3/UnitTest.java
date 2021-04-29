@@ -21,7 +21,9 @@ public class UnitTest {
     static App app;
 
 
-
+    /**
+     * Creating a connection to database
+     */
     @BeforeAll
     static void init() {
         app = new App();
@@ -29,17 +31,25 @@ public class UnitTest {
     }
 
 
-
+    /**
+     * testing display cities with null test
+     */
     @Test
     void displayCitiesTestNull() {
         app.displayCities(null);
     }
 
+    /**
+     * Testing all countries organised from largest population to smallest
+     */
     @Test
     void TestReport1(){
         app.report1();
     }
 
+    /**
+     * Testing all countries in continent organised by population largest to smallest
+     */
     @Test
     void TestReport2(){
         InputStream sysInBackup = System.in;
@@ -49,6 +59,9 @@ public class UnitTest {
         System.setIn(sysInBackup);
     }
 
+    /**
+     * Testing all countries in a region organised by population largest to smallest
+     */
     @Test
     void TestReport3(){
         InputStream sysInBackup = System.in;
@@ -58,6 +71,9 @@ public class UnitTest {
         System.setIn(sysInBackup);
     }
 
+    /**
+     * testing top n populated countries in world where n provided
+     */
     @Test
     void TestReport4(){
 
@@ -89,17 +105,17 @@ public class UnitTest {
      */
 
 
-
-
-
-
-
-
+    /**
+     * Testing all cities in world organised largest population to smallest
+     */
     @Test
     void TestReport7(){
         assertNotNull(app.report7());
     }
 
+    /**
+     * Testing all cities in a continent from largest population to smallest
+     */
     @Test
     void TestReport8(){
         InputStream sysInBackup = System.in;
@@ -109,6 +125,9 @@ public class UnitTest {
         System.setIn(sysInBackup);
     }
 
+    /**
+     * Testing all cities in a region from largest population to smallest
+     */
     @Test
     void TestReport9(){
         InputStream sysInBackup = System.in;
@@ -118,6 +137,9 @@ public class UnitTest {
         System.setIn(sysInBackup);
     }
 
+    /**
+     * Testing all cities in a country from largest population to smallest
+     */
     @Test
     void TestReport10(){
         InputStream sysInBackup = System.in;
@@ -127,6 +149,9 @@ public class UnitTest {
         System.setIn(sysInBackup);
     }
 
+    /**
+     * Testing all cities in a district from largest population to smallest
+     */
     @Test
     void TestReport11(){
         InputStream sysInBackup = System.in;
@@ -147,6 +172,9 @@ public class UnitTest {
 
      */
 
+    /**
+     * Testing number of people living in cities and not in cities in continents
+     */
     @Test
     void TestReport23(){
         InputStream sysInBackup = System.in;
@@ -156,6 +184,9 @@ public class UnitTest {
         assertEquals("Population in Cities 241942813 Population not in Cities 488131787", app.report23());
     }
 
+    /**
+     * Testing number of people living in cities and not in cities in Regions
+     */
     @Test
     void TestReport24(){
         InputStream sysInBackup = System.in;
@@ -165,6 +196,9 @@ public class UnitTest {
         assertEquals("Population in Cities 70371374 Population not in Cities 118009326", app.report24());
     }
 
+    /**
+     * Testing number of people living in cities and not in cities in Countries
+     */
     @Test
     void TestReport25() {
         InputStream sysInBackup = System.in;
@@ -174,13 +208,18 @@ public class UnitTest {
         assertEquals("Population in Cities 11313666 Population not in Cities 7572334", app.report25());
     }
 
+    /**
+     * Testing population of world
+     */
     @Test
     void TestReport26() {
         assertEquals("6078749450", app.report26());
     }
 
 
-
+    /**
+     * Testing population of Continents
+     */
     @Test
     void TestReport27() {
         InputStream sysInBackup = System.in;
@@ -192,6 +231,9 @@ public class UnitTest {
         System.setIn(sysInBackup);
     }
 
+    /**
+     * Testing population of region
+     */
     @Test
     void TestReport28(){
         InputStream sysInBackup = System.in;
@@ -203,6 +245,9 @@ public class UnitTest {
         System.setIn(sysInBackup);
     }
 
+    /**
+     * Testing population of Countries
+     */
     @Test
     void TestReport29(){
         InputStream sysInBackup = System.in;
@@ -214,6 +259,9 @@ public class UnitTest {
         System.setIn(sysInBackup);
     }
 
+    /**
+     * Testing population of District
+     */
     @Test
     void TestReport30(){
         InputStream sysInBackup = System.in;
@@ -225,6 +273,9 @@ public class UnitTest {
         System.setIn(sysInBackup);
     }
 
+    /**
+     * Testing population of City
+     */
     @Test
     void TestReport31(){
         InputStream sysInBackup = System.in;
@@ -236,6 +287,9 @@ public class UnitTest {
         System.setIn(sysInBackup);
     }
 
+    /**
+     * Testing Report of most used languages
+     */
     @Test
     void TestReport32(){
         int i = 0;

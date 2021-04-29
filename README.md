@@ -30,3 +30,14 @@
 | 19     | All the capital cities in a region organised by largest to smallest. | Yes | ![report19.PNG](screenshots/report19.PNG) |
 | 20     | The top N populated capital cities in the world where N is provided by the user. | Yes | ![report20.PNG](screenshots/report20.PNG) |
 | 21     | The top N populated capital cities in a continent where N is provided by the user. | Yes | ![report21.PNG](screenshots/report21.PNG) |
+| 22     | The top N populated capital cities in a region where N is provided by the user. | Yes | ![report22.PNG](screenshots/report22.PNG) |
+| 23     | Report on a number of people living in cities and not living in cities in continents | Yes | ![report23.PNG](screenshots/report23.PNG) |
+| 24     | Report on a number of people living in cities and not living in cities in Regions | Yes | ![report24.PNG](screenshots/report24.PNG) |
+| 25     | Report on a number of people living in cities and not living in cities in Countries | Yes | ![report25.PNG](screenshots/report25.PNG) |
+| 26     | Produce population of world | Yes | ![report26.PNG](screenshots/report26.PNG) |
+| 27     | Produce Population of continent | Yes | ![report27.PNG](screenshots/report27.PNG) |
+| 28     | Produce Population of regions | Yes | ![report28.PNG](screenshots/report28.PNG) |
+| 29     | Produce Population of Countries | Yes | ![report29.PNG](screenshots/report29.PNG) |
+| 30     | Produce Population on District | Yes | ![report30.PNG](screenshots/report30.PNG) |
+| 31     | Produce Population on City | Yes | ![report31.PNG](screenshots/report31.PNG) |
+| 32     | Produce a report on most spoken languages | Yes | ![report32.PNG](screenshots/report32.PNG) |
