@@ -6,6 +6,7 @@
 - License [![LICENSE](https://img.shields.io/github/license/Group-3-SEM/Group-3.svg?style=flat-square)](https://github.com/Group-3-SEM/Group-3/blob/master/LICENSE.md)
 - Code Coverage [![codecov](https://codecov.io/gh/Group-3-SEM/Group-3/branch/master/graph/badge.svg?token=W97UQZ2KYE)](https://codecov.io/gh/Group-3-SEM/Group-3)
 
+32 requirments of 32 have been implemented, which is 100%
 
 | ID    | Name | Met  | Screenshot |
 |-------|------|------|------------|
