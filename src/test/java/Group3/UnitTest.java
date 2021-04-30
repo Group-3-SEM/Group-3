@@ -85,25 +85,6 @@ public class UnitTest {
         assertNotNull(app.report4());
         System.setIn(sysInBackup);
     }
-    /*
-    @Test
-    void TestReport13(){
-        String simulatedUserInput = "3";
-        String simulatedUserIn = "Asia";
-
-        InputStream sysInBackup = System.in;
-        ByteArrayInputStream in = new ByteArrayInputStream(simulatedUserInput.getBytes());
-        ByteArrayInputStream ini = new ByteArrayInputStream(simulatedUserIn.getBytes());
-        System.setIn(in);
-        System.setIn(ini);
-
-
-        assertNotNull(app.report13());
-        System.setIn(sysInBackup);
-    }
-
-     */
-
 
     /**
      * Testing all cities in world organised largest population to smallest
@@ -160,17 +141,6 @@ public class UnitTest {
         assertNotNull(app.report11());
         System.setIn(sysInBackup);
     }
-    /*
-    @Test
-    void TestReport20(){
-        InputStream sysInBackup = System.in;
-        ByteArrayInputStream in = new ByteArrayInputStream("3".getBytes());
-        System.setIn(in);
-        assertNotNull(app.report20());
-        System.setIn(sysInBackup);
-    }
-
-     */
 
     /**
      * Testing number of people living in cities and not in cities in continents
@@ -309,24 +279,6 @@ public class UnitTest {
         i++;
         assertEquals(str5, app.report32(i));
     }
-
-    /*
-    @Test
-    void TestReport60(){
-        assertNotNull(app.report60());
-    }
-
-    @Test
-    void TestReport61(){
-        assertNotNull(app.report61());
-    }
-
-    @Test
-    void TestReport62(){
-        assertNotNull(app.report62());
-    }
-
-     */
 
     @Test
     void TestValidateIntegerInput(){
